@@ -1,0 +1,21 @@
+{
+  "name": "portfolio-md-zihaduzzaman",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "High-Performance Minimalist Static Developer Portfolio for MD Zihaduzzaman",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.0.9",
+    "astro": "^5.4.1",
+    "tailwindcss": "^4.0.9"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.3"
+  }
+}

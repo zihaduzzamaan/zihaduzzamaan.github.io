@@ -1,0 +1,374 @@
+---
+import { portfolioData } from '../data/portfolioData';
+import QuickInfo from './QuickInfo.astro';
+import AaravPills from './AaravPills.astro';
+
+const { personal } = portfolioData;
+---
+
+<section class="relative w-full">
+  <!-- Landscape Technical Cover Area (Elevated Professional Banner) -->
+  <div class="relative h-36 sm:h-52 md:h-64 w-full overflow-hidden border-t border-emerald-500/10 border-b border-[var(--edge)] transition-colors duration-200">
+    <!-- Layer 0: Base background color -->
+    <div class="absolute inset-0 bg-zinc-100/90 dark:bg-zinc-950"></div>
+
+    <!-- Layer 1: Animated flowing gradient mesh -->
+    <div class="hero-gradient-flow absolute inset-0"></div>
+
+    <!-- Layer 2: Refined technical dot-grid pattern -->
+    <div class="absolute inset-0 dot-grid opacity-40 text-zinc-400 dark:text-zinc-600 dark:opacity-15"></div>
+
+    <!-- Layer 3: Soft vignette overlay -->
+    <div class="absolute inset-0 bg-radial from-transparent via-transparent to-[var(--background)]/80"></div>
+
+    <!-- Layer 4: Horizontal scan line: subtle life signal -->
+    <div class="hero-scanline absolute inset-0 pointer-events-none"></div>
+
+    <!-- Centerpiece: SVG Name Logo + "THE DEV" Glitch + Tagline -->
+    <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-4 sm:px-6 z-10 select-none">
+      <!-- SVG Name Logo (Proportional to container) -->
+      <svg
+        id="hero-logo-svg"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 1216 256"
+        class="h-7 sm:h-10 md:h-12 w-auto text-[var(--foreground)] drop-shadow-sm transition-transform duration-300 hover:scale-105"
+        aria-label="ZIHAD Logo"
+      >
+        <path
+          fill="currentColor"
+          d="
+            M0 0h192v64H0V0Z
+            M128 64h64v64h-64V64Z
+            M64 128h64v64H64v-64Z
+            M0 192h192v64H0v-64Z
+
+            M256 0h192v64h-192V0Z
+            M320 64h64v128h-64V64Z
+            M256 192h192v64h-192v-64Z
+
+            M512 0h64v256h-64V0Z
+            M576 128h64v64h-64v-64Z
+            M640 0h64v256h-64V0Z
+
+            M816 0h96v64h-96V0Z
+            M768 64h64v64h-64V64Z
+            M896 64h64v64h-64V64Z
+            M768 128h192v64h-192v-64Z
+            M768 192h64v64h-64v-64Z
+            M896 192h64v64h-64v-64Z
+
+            M1024 0h64v256h-64V0Z
+            M1088 0h64v64h-64V0Z
+            M1152 64h64v128h-64V64Z
+            M1088 192h64v64h-64v-64Z
+          "
+        />
+      </svg>
+
+      <!-- "THE DEV" with Intermittent Glitch Burst -->
+      <div class="mt-2 sm:mt-3">
+        <span
+          class="glitch-text font-mono text-xs sm:text-base md:text-lg font-bold tracking-[0.3em] sm:tracking-[0.35em] uppercase text-[var(--foreground)]"
+          data-text="THE DEV"
+        >
+          THE DEV
+        </span>
+      </div>
+
+      <!-- Professional Tagline: fills the empty space with purpose -->
+      <p class="mt-2.5 sm:mt-3 max-w-xs sm:max-w-sm text-center text-[10px] sm:text-xs font-medium text-zinc-500 dark:text-zinc-500 leading-relaxed tracking-wide">
+        {personal.bannerQuote}
+      </p>
+    </div>
+  </div>
+
+  <!-- Profile & Identity Row: Profile Image Overlaps Upper Hero Section -->
+  <div class="px-3.5 sm:px-6 pt-1 sm:pt-2 pb-2">
+    <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 sm:gap-6">
+      <!-- Left: Profile Image BEFORE Name Section (Side-by-Side Flex Layout) -->
+      <div class="flex items-end gap-3.5 sm:gap-5 min-w-0 flex-1">
+        <!-- Profile Image Avatar: Twice Current Size, Overlapping Upper Hero Section -->
+        <div class="relative size-32 sm:size-44 shrink-0 rounded-full border-4 sm:border-[5px] border-[var(--background)] bg-[var(--background)] shadow-2xl p-0.5 overflow-hidden z-20 transition-transform duration-200 hover:scale-105 group -mt-16 sm:-mt-22 md:-mt-24">
+          <img
+            src={personal.avatarUrl}
+            alt={personal.name}
+            class="size-full rounded-full object-cover select-none transition-transform duration-300 group-hover:scale-105"
+            width="176"
+            height="176"
+            loading="eager"
+            decoding="async"
+          />
+        </div>
+
+        <!-- Name & Dynamic Roles Section -->
+        <div class="space-y-1 min-w-0 flex-1 pb-1 sm:pb-2">
+          <div class="flex items-center gap-1.5 sm:gap-2">
+            <h1 class="text-xl sm:text-3xl font-bold tracking-tight text-[var(--foreground)] truncate">
+              {personal.name}
+            </h1>
+            <!-- Verified Developer Badge -->
+            <span class="inline-flex items-center text-sky-500 shrink-0 translate-y-[2px] sm:translate-y-[3.5px]" title="Verified Developer">
+              <svg class="h-4.5 w-4.5 sm:h-5 sm:w-5 fill-current" viewBox="0 0 24 24">
+                <path d="M23 12l-2.44-2.79.34-3.69-3.61-.82-1.89-3.2L12 2.96 8.6 1.5 6.71 4.69 3.1 5.5l.34 3.7L1 12l2.44 2.79-.34 3.7 3.61.82L8.6 22.5l3.4-1.47 3.4 1.46 1.89-3.19 3.61-.82-.34-3.69L23 12zm-12.91 4.72l-3.8-3.81 1.48-1.48 2.32 2.33 5.85-5.87 1.48 1.48-7.33 7.35z"/>
+              </svg>
+            </span>
+          </div>
+
+          <!-- Dynamic Continuous Role Rotator -->
+          <div class="flex items-center gap-1.5 min-h-[22px] sm:min-h-[26px]">
+            <span
+              id="hero-dynamic-role"
+              class="font-outfit text-sm sm:text-[15px] md:text-base font-semibold tracking-wide text-zinc-600 dark:text-zinc-400 truncate"
+            >
+              Full-Stack Developer
+            </span>
+            <span class="inline-block h-3 sm:h-3.5 w-0.5 bg-emerald-500 animate-pulse shrink-0"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Social & Status Pills (AaravPills Toolbar on Mobile) -->
+      <div class="w-full sm:w-auto shrink-0 pt-2.5 sm:pt-0 border-t sm:border-t-0 border-[var(--edge)]/60 flex justify-end">
+        <AaravPills />
+      </div>
+    </div>
+  </div>
+
+  <!-- Divider Line -->
+  <div class="dashed-separator"></div>
+
+  <!-- Quick Info Metadata Grid (1:1 with Abdul Rehman's Bio Data) -->
+  <QuickInfo />
+</section>
+
+<style>
+  /* ── High-Intensity Intermittent Glitch Burst on "THE DEV" ── */
+  .glitch-text {
+    position: relative;
+    display: inline-block;
+    animation: glitch-base 6s infinite;
+  }
+  .glitch-text::before,
+  .glitch-text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .glitch-text::before {
+    left: 0;
+    text-shadow: -3px 0 #00f0ff, -1px 0 #00ffff;
+    animation: glitch-burst-1 6s infinite steps(2, start);
+  }
+  .glitch-text::after {
+    left: 0;
+    text-shadow: 3px 0 #ff0055, 1px 0 #ff1493;
+    animation: glitch-burst-2 6s infinite steps(2, start);
+  }
+
+  @keyframes glitch-base {
+    0%, 88%, 100% {
+      transform: translate(0, 0);
+    }
+    89% {
+      transform: translate(-2px, 1px) skewX(-2deg);
+    }
+    90.5% {
+      transform: translate(2px, -1px) skewX(2deg);
+    }
+    92% {
+      transform: translate(-1.5px, 0);
+    }
+    93.5% {
+      transform: translate(1px, 0.5px);
+    }
+    95% {
+      transform: translate(0, 0);
+    }
+  }
+
+  @keyframes glitch-burst-1 {
+    0%, 88%, 100% {
+      opacity: 0;
+      clip-path: inset(0 0 0 0);
+      transform: translate(0, 0);
+    }
+    89% {
+      opacity: 1;
+      clip-path: inset(15% 0 55% 0);
+      transform: translate(-4px, -1px) skewX(-4deg);
+    }
+    90.5% {
+      opacity: 1;
+      clip-path: inset(65% 0 10% 0);
+      transform: translate(4px, 1.5px) skewX(3deg);
+    }
+    92% {
+      opacity: 1;
+      clip-path: inset(30% 0 40% 0);
+      transform: translate(-3px, 0.5px) skewX(-3deg);
+    }
+    93.5% {
+      opacity: 1;
+      clip-path: inset(5% 0 75% 0);
+      transform: translate(3px, -1px) skewX(2deg);
+    }
+    95% {
+      opacity: 0;
+      clip-path: inset(0 0 0 0);
+      transform: translate(0, 0);
+    }
+  }
+
+  @keyframes glitch-burst-2 {
+    0%, 88%, 100% {
+      opacity: 0;
+      clip-path: inset(0 0 0 0);
+      transform: translate(0, 0);
+    }
+    89.5% {
+      opacity: 1;
+      clip-path: inset(50% 0 20% 0);
+      transform: translate(4px, 1px) skewX(4deg);
+    }
+    91% {
+      opacity: 1;
+      clip-path: inset(10% 0 65% 0);
+      transform: translate(-4px, -1px) skewX(-4deg);
+    }
+    92.5% {
+      opacity: 1;
+      clip-path: inset(75% 0 8% 0);
+      transform: translate(3px, -0.5px) skewX(2deg);
+    }
+    94% {
+      opacity: 1;
+      clip-path: inset(25% 0 48% 0);
+      transform: translate(-2.5px, 1px) skewX(-2deg);
+    }
+    95.5% {
+      opacity: 0;
+      clip-path: inset(0 0 0 0);
+      transform: translate(0, 0);
+    }
+  }
+
+  .font-outfit {
+    font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+
+  /* ── Animated Flowing Gradient Mesh ── */
+  .hero-gradient-flow {
+    background: 
+      radial-gradient(ellipse 80% 60% at 20% 40%, rgba(16, 185, 129, 0.12) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 80% at 80% 30%, rgba(6, 182, 212, 0.08) 0%, transparent 70%),
+      radial-gradient(ellipse 70% 50% at 50% 80%, rgba(139, 92, 246, 0.06) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 60% at 70% 60%, rgba(16, 185, 129, 0.05) 0%, transparent 70%);
+    background-size: 200% 200%;
+    animation: hero-gradient-shift 12s ease-in-out infinite;
+    will-change: background-position;
+  }
+
+  :global(.dark) .hero-gradient-flow {
+    background: 
+      radial-gradient(ellipse 80% 60% at 20% 40%, rgba(16, 185, 129, 0.18) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 80% at 80% 30%, rgba(6, 182, 212, 0.12) 0%, transparent 70%),
+      radial-gradient(ellipse 70% 50% at 50% 80%, rgba(139, 92, 246, 0.10) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 60% at 70% 60%, rgba(16, 185, 129, 0.08) 0%, transparent 70%);
+    background-size: 200% 200%;
+  }
+
+  @keyframes hero-gradient-shift {
+    0%, 100% {
+      background-position: 0% 0%;
+    }
+    25% {
+      background-position: 100% 50%;
+    }
+    50% {
+      background-position: 50% 100%;
+    }
+    75% {
+      background-position: 0% 50%;
+    }
+  }
+
+  /* Horizontal Scan Line: subtle alive signal */
+  .hero-scanline::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, var(--foreground) 30%, var(--foreground) 70%, transparent 100%);
+    opacity: 0.04;
+    animation: hero-scan 8s linear infinite;
+    will-change: top;
+  }
+
+  @keyframes hero-scan {
+    0% { top: 0%; }
+    100% { top: 100%; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-gradient-flow {
+      animation: none;
+    }
+    .hero-scanline::after {
+      animation: none;
+      display: none;
+    }
+  }
+</style>
+
+<script is:inline>
+  (function initRoleRotator() {
+    const el = document.getElementById('hero-dynamic-role');
+    if (!el) return;
+
+    const phrases = [
+      'Full-Stack Developer',
+      'Software Engineer',
+      'Backend & API Architect',
+      'Data Engineering Enthusiast',
+      'Problem Solver & Builder'
+    ];
+
+    let phraseIdx = 0;
+    let charIdx = phrases[0].length;
+    let isDeleting = true;
+
+    function tick() {
+      const current = phrases[phraseIdx];
+
+      if (isDeleting) {
+        charIdx--;
+        el.textContent = current.substring(0, charIdx);
+        if (charIdx === 0) {
+          isDeleting = false;
+          phraseIdx = (phraseIdx + 1) % phrases.length;
+          setTimeout(tick, 220); // crisp pause before typing next phrase
+          return;
+        }
+        setTimeout(tick, 24); // fast backspacing (was 45ms)
+      } else {
+        charIdx++;
+        el.textContent = current.substring(0, charIdx);
+        if (charIdx === current.length) {
+          isDeleting = true;
+          setTimeout(tick, 1400); // comfortable readable pause (was 2000ms)
+          return;
+        }
+        setTimeout(tick, 42); // fast typing speed (was 80ms)
+      }
+    }
+
+    setTimeout(tick, 1500);
+  })();
+</script>

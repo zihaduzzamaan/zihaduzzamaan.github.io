@@ -1,0 +1,339 @@
+---
+// Clean Navbar with ZIHAD Monogram SVG, Animated Left-Aligned Menus, CV Button & Mobile Hamburger
+import ThemeToggle from './ThemeToggle.astro';
+---
+
+<header class="sticky top-0 z-40 w-full border-b border-[var(--edge)] bg-[var(--background)]/90 backdrop-blur-md transition-colors duration-200">
+  <div class="relative flex h-14 items-center justify-between px-3.5 sm:px-6">
+    <!-- Left Section: Navbar SVG Monogram Logo (ZIHAD) -->
+    <div class="flex items-center shrink-0 min-w-0 z-10">
+      <a
+        href="#"
+        id="nav-logo"
+        class="flex items-center group focus:outline-none py-1 transition-all duration-300 ease-out overflow-hidden max-w-0 opacity-0 pointer-events-none -translate-x-3"
+        aria-label="ZIHAD - Home"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 1216 256"
+          class="h-5 sm:h-5.5 w-auto text-[var(--foreground)] transition-transform group-hover:scale-105 shrink-0"
+          aria-hidden="true"
+        >
+          <path
+            fill="currentColor"
+            d="
+              M0 0h192v64H0V0Z
+              M128 64h64v64h-64V64Z
+              M64 128h64v64H64v-64Z
+              M0 192h192v64H0v-64Z
+
+              M256 0h192v64h-192V0Z
+              M320 64h64v128h-64V64Z
+              M256 192h192v64h-192v-64Z
+
+              M512 0h64v256h-64V0Z
+              M576 128h64v64h-64v-64Z
+              M640 0h64v256h-64V0Z
+
+              M816 0h96v64h-96V0Z
+              M768 64h64v64h-64V64Z
+              M896 64h64v64h-64V64Z
+              M768 128h192v64h-192v-64Z
+              M768 192h64v64h-64v-64Z
+              M896 192h64v64h-64v-64Z
+
+              M1024 0h64v256h-64V0Z
+              M1088 0h64v64h-64V0Z
+              M1152 64h64v128h-64V64Z
+              M1088 192h64v64h-64v-64Z
+            "
+          />
+        </svg>
+      </a>
+    </div>
+
+    <!-- Desktop Navigation Anchors (Left-Aligned when SVG is hidden, Center-Aligned when scrolled) -->
+    <nav
+      id="desktop-nav-menu"
+      class="hidden md:flex items-center justify-center gap-4 lg:gap-6 xl:gap-7 text-xs font-medium text-[var(--muted-foreground)] pointer-events-auto absolute top-1/2 left-0 z-10"
+      style="transform: translate3d(24px, -50%, 0);"
+    >
+      <a href="#about" class="transition-colors hover:text-[var(--foreground)]">About</a>
+      <a href="#experience" class="transition-colors hover:text-[var(--foreground)]">Experience</a>
+      <a href="#projects" class="transition-colors hover:text-[var(--foreground)]">Projects</a>
+      <a href="#reviews" class="transition-colors hover:text-[var(--foreground)]">Reviews</a>
+      <a href="#stack" class="transition-colors hover:text-[var(--foreground)]">Stack</a>
+      <a href="#education" class="transition-colors hover:text-[var(--foreground)]">Education</a>
+      <a href="#contact" class="transition-colors hover:text-[var(--foreground)]">Contact</a>
+    </nav>
+
+    <!-- Right Controls: Download CV Button + Mobile Theme Toggle + Hamburger Toggle -->
+    <div class="flex items-center gap-2 sm:gap-3 shrink-0">
+      <!-- Mobile Theme Toggle (Short Width Devices) -->
+      <div class="md:hidden">
+        <ThemeToggle />
+      </div>
+
+      <!-- CV Button: Download Icon + "CV" on short width devices, Download Icon + "Download CV" on desktop -->
+      <a
+        href="mailto:zihaduzzamanzishan@gmail.com?subject=CV%20Request%20-%20MD%20Zihaduzzaman"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="group relative inline-flex items-center gap-1.5 md:gap-2 h-8 rounded-full px-2.5 md:px-3.5 select-none transition-all duration-150 ease-out hover:scale-105 active:scale-95 bg-zinc-900 text-white border border-zinc-900 shadow-xs hover:bg-black hover:shadow-sm dark:bg-[#1c1c1f] dark:text-zinc-200 dark:border-white/14 dark:hover:text-white shrink-0"
+        style="box-shadow: var(--pill-shadow);"
+        title="Download CV"
+      >
+        <!-- Download Icon -->
+        <svg class="h-3.5 w-3.5 shrink-0 text-zinc-300 group-hover:text-white transition-colors" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="7 10 12 15 17 10"></polyline>
+          <line x1="12" y1="15" x2="12" y2="3"></line>
+        </svg>
+        <!-- On short width / tablet devices: "CV" -->
+        <span class="lg:hidden font-mono text-xs font-bold tracking-tight">CV</span>
+        <!-- On desktop (lg+): "Download CV" -->
+        <span class="hidden lg:inline tracking-tight text-xs font-semibold">Download CV</span>
+      </a>
+
+      <!-- Mobile Hamburger Button (Short Width Devices) -->
+      <button
+        id="mobile-menu-btn"
+        type="button"
+        class="md:hidden relative flex h-8 w-8 items-center justify-center rounded-lg border border-[var(--border)] bg-[var(--badge-bg)] text-[var(--foreground)] transition-colors hover:bg-[var(--accent)] active:scale-95 focus:outline-none cursor-pointer"
+        aria-label="Toggle navigation menu"
+        aria-expanded="false"
+      >
+        <!-- Hamburger Icon -->
+        <svg id="hamburger-icon" class="h-4 w-4 transition-transform duration-200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="4" x2="20" y1="12" y2="12"></line>
+          <line x1="4" x2="20" y1="6" y2="6"></line>
+          <line x1="4" x2="20" y1="18" y2="18"></line>
+        </svg>
+        <!-- Close (X) Icon -->
+        <svg id="close-icon" class="hidden h-4 w-4 transition-transform duration-200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 6 6 18"></path>
+          <path d="m6 6 12 12"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Collapsible Menu Drawer (Activated via Hamburger) -->
+  <div
+    id="mobile-menu-drawer"
+    class="hidden md:hidden border-t border-[var(--edge)] bg-[var(--background)]/95 backdrop-blur-xl px-4 py-3 shadow-xl transition-all duration-200"
+  >
+    <div class="grid grid-cols-2 gap-2 text-xs font-medium">
+      <a href="#about" class="mobile-nav-link flex items-center justify-between rounded-lg p-2.5 text-[var(--foreground)] hover:bg-[var(--accent)] transition-colors">
+        <span>About</span>
+        <span class="text-[10px] text-[var(--muted-foreground)]">↗</span>
+      </a>
+      <a href="#experience" class="mobile-nav-link flex items-center justify-between rounded-lg p-2.5 text-[var(--foreground)] hover:bg-[var(--accent)] transition-colors">
+        <span>Experience</span>
+        <span class="text-[10px] text-[var(--muted-foreground)]">↗</span>
+      </a>
+      <a href="#projects" class="mobile-nav-link flex items-center justify-between rounded-lg p-2.5 text-[var(--foreground)] hover:bg-[var(--accent)] transition-colors">
+        <span>Projects</span>
+        <span class="text-[10px] text-[var(--muted-foreground)]">↗</span>
+      </a>
+      <a href="#reviews" class="mobile-nav-link flex items-center justify-between rounded-lg p-2.5 text-[var(--foreground)] hover:bg-[var(--accent)] transition-colors">
+        <span>Reviews</span>
+        <span class="text-[10px] text-[var(--muted-foreground)]">↗</span>
+      </a>
+      <a href="#stack" class="mobile-nav-link flex items-center justify-between rounded-lg p-2.5 text-[var(--foreground)] hover:bg-[var(--accent)] transition-colors">
+        <span>Stack</span>
+        <span class="text-[10px] text-[var(--muted-foreground)]">↗</span>
+      </a>
+      <a href="#education" class="mobile-nav-link flex items-center justify-between rounded-lg p-2.5 text-[var(--foreground)] hover:bg-[var(--accent)] transition-colors">
+        <span>Education</span>
+        <span class="text-[10px] text-[var(--muted-foreground)]">↗</span>
+      </a>
+      <a href="#contact" class="mobile-nav-link col-span-2 flex items-center justify-between rounded-lg p-2.5 text-[var(--foreground)] hover:bg-[var(--accent)] transition-colors border border-[var(--edge)]">
+        <span class="font-semibold">Contact & Socials</span>
+        <svg class="h-3.5 w-3.5 text-[var(--muted-foreground)]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14"></path>
+          <path d="m12 5 7 7-7 7"></path>
+        </svg>
+      </a>
+    </div>
+  </div>
+</header>
+
+<script is:inline>
+  (function initNavbarControls() {
+    function setup() {
+      const navLogo = document.getElementById('nav-logo');
+      const desktopNav = document.getElementById('desktop-nav-menu');
+      const heroLogo = document.getElementById('hero-logo-svg');
+      const menuBtn = document.getElementById('mobile-menu-btn');
+      const menuDrawer = document.getElementById('mobile-menu-drawer');
+      const hamburgerIcon = document.getElementById('hamburger-icon');
+      const closeIcon = document.getElementById('close-icon');
+
+      // Hamburger mobile toggle
+      if (menuBtn && menuDrawer) {
+        function toggleDrawer(open) {
+          const isOpen = open !== undefined ? open : menuDrawer.classList.contains('hidden');
+          if (isOpen) {
+            menuDrawer.classList.remove('hidden');
+            menuBtn.setAttribute('aria-expanded', 'true');
+            hamburgerIcon?.classList.add('hidden');
+            closeIcon?.classList.remove('hidden');
+          } else {
+            menuDrawer.classList.add('hidden');
+            menuBtn.setAttribute('aria-expanded', 'false');
+            hamburgerIcon?.classList.remove('hidden');
+            closeIcon?.classList.add('hidden');
+          }
+        }
+
+        menuBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const isCurrentlyOpen = !menuDrawer.classList.contains('hidden');
+          toggleDrawer(!isCurrentlyOpen);
+        });
+
+        // Close mobile drawer when link is clicked
+        const mobileLinks = menuDrawer.querySelectorAll('.mobile-nav-link');
+        mobileLinks.forEach((link) => {
+          link.addEventListener('click', () => {
+            toggleDrawer(false);
+          });
+        });
+
+        // Close on click outside
+        document.addEventListener('click', (e) => {
+          if (!menuDrawer.classList.contains('hidden') && !menuDrawer.contains(e.target) && !menuBtn.contains(e.target)) {
+            toggleDrawer(false);
+          }
+        });
+
+        // Close on Escape key
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && !menuDrawer.classList.contains('hidden')) {
+            toggleDrawer(false);
+          }
+        });
+      }
+
+      // Scroll observer for navbar logo & dynamic menu position
+      let isVisible = null;
+
+      function setNavPosition(center) {
+        if (!desktopNav) return;
+        const parent = desktopNav.parentElement;
+        const parentWidth = parent ? parent.clientWidth : window.innerWidth;
+        const navWidth = desktopNav.offsetWidth;
+        if (center) {
+          const centerOffset = Math.round((parentWidth - navWidth) / 2);
+          desktopNav.style.transform = `translate3d(${centerOffset}px, -50%, 0)`;
+        } else {
+          const leftOffset = window.innerWidth >= 640 ? 24 : 14;
+          desktopNav.style.transform = `translate3d(${leftOffset}px, -50%, 0)`;
+        }
+      }
+
+      function setLogoVisible(show) {
+        if (!navLogo || isVisible === show) return;
+        isVisible = show;
+        if (show) {
+          // 1. Reveal logo on the left
+          navLogo.classList.remove('max-w-0', 'opacity-0', 'pointer-events-none', '-translate-x-3');
+          navLogo.classList.add('max-w-[120px]', 'sm:max-w-[140px]', 'opacity-100', 'pointer-events-auto', 'translate-x-0');
+
+          // 2. Animate desktop menu to exact center via single GPU transform
+          setNavPosition(true);
+        } else {
+          // 1. Hide logo on the left
+          navLogo.classList.remove('max-w-[120px]', 'sm:max-w-[140px]', 'opacity-100', 'pointer-events-auto', 'translate-x-0');
+          navLogo.classList.add('max-w-0', 'opacity-0', 'pointer-events-none', '-translate-x-3');
+
+          // 2. Animate desktop menu back to the left via single GPU transform
+          setNavPosition(false);
+        }
+      }
+
+      function updateLogoState() {
+        if (!heroLogo) {
+          setLogoVisible(true);
+          return;
+        }
+        const rect = heroLogo.getBoundingClientRect();
+        if (isVisible === null) {
+          // Initial load check
+          const shouldShow = rect.bottom <= 56;
+          // Apply initial position without transition animation
+          if (desktopNav) desktopNav.style.transition = 'none';
+          setLogoVisible(shouldShow);
+          // Restore transition after first frame
+          requestAnimationFrame(() => {
+            if (desktopNav) desktopNav.style.transition = '';
+          });
+          return;
+        }
+        // Hysteresis deadband: prevents high-speed oscillation when scrolling right on boundary
+        // Switch to visible when scrolled past header (bottom <= 48px)
+        // Switch back to hidden when scrolled back up towards the top (bottom >= 72px)
+        if (isVisible) {
+          if (rect.bottom >= 72) {
+            setLogoVisible(false);
+          }
+        } else {
+          if (rect.bottom <= 48) {
+            setLogoVisible(true);
+          }
+        }
+      }
+
+      if (heroLogo) {
+        let ticking = false;
+        function onScrollOrResize() {
+          if (!ticking) {
+            window.requestAnimationFrame(() => {
+              updateLogoState();
+              ticking = false;
+            });
+            ticking = true;
+          }
+        }
+
+        // High precision IntersectionObserver with rootMargin matching navbar height
+        const observer = new IntersectionObserver(() => {
+          onScrollOrResize();
+        }, {
+          threshold: [0, 0.25, 0.5, 0.75, 1],
+          rootMargin: '-56px 0px 0px 0px'
+        });
+        observer.observe(heroLogo);
+
+        // Passive scroll and resize listeners throttled by requestAnimationFrame
+        window.addEventListener('scroll', onScrollOrResize, { passive: true });
+        window.addEventListener('resize', () => {
+          if (isVisible !== null) {
+            setNavPosition(isVisible);
+          }
+          onScrollOrResize();
+        }, { passive: true });
+      } else {
+        setLogoVisible(true);
+      }
+
+      // Initial check on load
+      updateLogoState();
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', setup);
+    } else {
+      setup();
+    }
+  })();
+</script>
+
+<style is:global>
+  #desktop-nav-menu {
+    transition: transform 400ms cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform;
+  }
+</style>

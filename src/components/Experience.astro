@@ -1,0 +1,63 @@
+---
+import { portfolioData } from '../data/portfolioData';
+
+const { experience } = portfolioData;
+---
+
+<section id="experience" class="px-3.5 py-6 sm:px-6 sm:py-8">
+  <!-- Section Header (Clean, Big & Bold) -->
+  <div class="mb-5 sm:mb-6 flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 border-b border-[var(--edge)] pb-2.5 sm:pb-3">
+    <h2 class="text-xl sm:text-3xl font-bold tracking-tight text-[var(--foreground)]">
+      Professional Experience
+    </h2>
+    <span class="font-mono text-xs text-[var(--muted-foreground)]">Engineering Timeline & Milestones</span>
+  </div>
+
+  <!-- Connected Timeline (Abdul Rehman Style) -->
+  <div class="relative space-y-4 sm:space-y-6 before:absolute before:left-3 before:top-2 before:h-[calc(100%-1rem)] before:w-px before:bg-[var(--border)]">
+    {experience.map((item) => (
+      <div class="relative pl-7 sm:pl-9">
+        <!-- Node Dot -->
+        <div class="absolute left-1.5 sm:left-1.5 top-1.5 flex h-3 sm:h-3.5 w-3 sm:w-3.5 items-center justify-center rounded-full border-2 border-[var(--background)] bg-[var(--foreground)]">
+          {item.current && (
+            <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
+          )}
+        </div>
+
+        <!-- Experience Card -->
+        <div class="rounded-xl border border-[var(--border)] bg-[var(--card)] p-3 sm:p-4 transition-all hover:border-[var(--muted-foreground)]/40">
+          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-0.5 sm:gap-1 mb-1.5 sm:mb-2">
+            <h3 class="text-xs sm:text-sm font-semibold text-[var(--foreground)]">
+              {item.role}
+            </h3>
+            <span class="font-mono text-[11px] sm:text-xs text-[var(--muted-foreground)]">
+              {item.period}
+            </span>
+          </div>
+
+          <div class="flex items-center gap-2 mb-2 sm:mb-3 text-[11px] sm:text-xs font-mono text-emerald-500">
+            <span>{item.company}</span>
+            <span>•</span>
+            <span class="text-[var(--muted-foreground)]">{item.location}</span>
+          </div>
+
+          <!-- Description Bullets -->
+          <ul class="space-y-1 sm:space-y-1.5 text-[11.5px] sm:text-xs text-[var(--muted-foreground)] leading-relaxed list-disc list-inside mb-2.5 sm:mb-3">
+            {item.description.map((bullet) => (
+              <li>{bullet}</li>
+            ))}
+          </ul>
+
+          <!-- Tech Stack Tags -->
+          <div class="flex flex-wrap gap-1">
+            {item.tags.map((tag) => (
+              <span class="rounded-md border border-[var(--border)] bg-[var(--badge-bg)] px-1.5 sm:px-2 py-0.5 font-mono text-[9.5px] sm:text-[10px] text-[var(--muted-foreground)]">
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>

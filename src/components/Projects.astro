@@ -1,0 +1,39 @@
+---
+import { portfolioData } from '../data/portfolioData';
+import ProjectCard from './ProjectCard.astro';
+
+const { projects } = portfolioData;
+---
+
+<section id="projects" class="px-3.5 py-6 sm:px-6 sm:py-8">
+  <!-- Section Header (Clean, Big & Bold) -->
+  <div class="mb-5 sm:mb-6 flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2 border-b border-[var(--edge)] pb-2.5 sm:pb-3">
+    <div class="flex items-center gap-2.5 sm:gap-3">
+      <h2 class="text-xl sm:text-3xl font-bold tracking-tight text-[var(--foreground)]">
+        Proof of Work
+      </h2>
+      <span class="rounded-full border border-[var(--border)] bg-[var(--badge-bg)] px-2 py-0.5 font-mono text-[11px] sm:text-xs font-semibold text-[var(--muted-foreground)]">
+        {projects.length}
+      </span>
+    </div>
+    <a
+      href="https://github.com/mdzihaduzzaman"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="inline-flex items-center gap-1 font-mono text-xs text-[var(--muted-foreground)] transition-colors hover:text-[var(--foreground)]"
+    >
+      <span>All Repositories</span>
+      <svg class="h-3 w-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14"></path>
+        <path d="m12 5 7 7-7 7"></path>
+      </svg>
+    </a>
+  </div>
+
+  <!-- 2-Column Responsive Card Grid (Aarav Sharma Style) -->
+  <div class="grid grid-cols-1 gap-3.5 sm:gap-4 sm:grid-cols-2">
+    {projects.map((project) => (
+      <ProjectCard project={project} />
+    ))}
+  </div>
+</section>

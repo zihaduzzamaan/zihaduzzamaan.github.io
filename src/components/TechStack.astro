@@ -1,0 +1,147 @@
+---
+// Technical Stack Component
+// Dark background on every icon container, ONLY visible in the light theme
+// In dark theme, background is transparent so logos float directly on the canvas
+import { portfolioData } from '../data/portfolioData';
+
+const { techStack } = portfolioData;
+
+// Monochrome logos that should be inverted to white on dark surfaces
+const whiteInvertList = ['Next.js', 'shadcn/ui', 'Prisma ORM', 'Pandas'];
+---
+
+<section id="stack" class="px-3.5 py-5 sm:px-6 sm:py-6">
+  <!-- Section Header (Clean, Big & Bold) -->
+  <div class="mb-4 sm:mb-5 flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 border-b border-[var(--edge)] pb-2.5 sm:pb-3">
+    <h2 class="text-xl sm:text-3xl font-bold tracking-tight text-[var(--foreground)]">
+      Technical Stack
+    </h2>
+    <span class="font-mono text-xs text-[var(--muted-foreground)]">Languages, Frameworks & Infrastructure</span>
+  </div>
+
+  <!-- Open Categorized Layout -->
+  <div class="space-y-4 sm:space-y-5">
+    {techStack.map((category) => (
+      <div class="relative overflow-visible">
+        <!-- Minimal Category Header with Hairline Divider -->
+        <div class="mb-2 sm:mb-2.5 flex items-center gap-2.5 sm:gap-3">
+          <h3 class="font-mono text-[11px] sm:text-xs font-semibold text-[var(--muted-foreground)] uppercase tracking-wider">
+            {category.category}
+          </h3>
+          <div class="h-px flex-1 bg-[var(--edge)]"></div>
+          <span class="font-mono text-[10px] sm:text-[11px] text-[var(--muted-foreground)]">
+            {category.items.length}
+          </span>
+        </div>
+
+        <!-- Logos Grid: Dark background container ONLY visible in light theme -->
+        <div class="flex flex-wrap items-center gap-2.5 sm:gap-4 py-0.5 px-0.5">
+          {category.items.map((tech) => {
+            const shouldInvert = whiteInvertList.includes(tech.name);
+            return (
+              <div
+                class="tech-icon-box group relative flex size-11 sm:size-14 shrink-0 items-center justify-center rounded-xl select-none cursor-pointer focus:outline-none transition-all duration-200 hover:scale-110 active:scale-95"
+                tabindex="0"
+                aria-label={tech.name}
+              >
+                {/* 1. Astro: Vector with white "A" and vibrant rocket flame */}
+                {tech.name === 'Astro' ? (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 128 128"
+                    class="size-7 sm:size-9 object-contain text-white transition-transform duration-200 group-hover:scale-110"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M16 82.4s16.5-8 33-8l12.4-38.3c.5-2 1.8-3.2 3.3-3.2 1.6 0 3 1.3 3.4 3.2l12.4 38.3c19.6 0 33 8 33 8l-28-76c-.8-2.3-2.2-3.7-4-3.7H48c-1.8 0-3.1 1.4-4 3.7l-28 76Z"
+                    />
+                    <path
+                      fill="url(#astro-flame-gradient)"
+                      d="M47.7 107.1c-5.5-5-7.2-15.7-4.9-23.4 4 4.9 9.6 6.4 15.4 7.3 8.9 1.3 17.6.8 25.9-3.2l2.8-1.7a18 18 0 0 1-7.2 20l-5.5 3.8c-5.6 3.8-7.2 8.2-5 14.7l.2.7a14 14 0 0 1-6.6-5.6 15.8 15.8 0 0 1-2.6-8.6c0-1.5 0-3-.2-4.5-.5-3.7-2.2-5.3-5.5-5.4-3.3-.1-5.9 2-6.6 5.2l-.2.7Z"
+                    />
+                    <defs>
+                      <linearGradient id="astro-flame-gradient" x1="64.7" x2="77.4" y1="119.2" y2="77.4" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#FF5D01" />
+                        <stop offset="1" stop-color="#F041FF" />
+                      </linearGradient>
+                    </defs>
+                  </svg>
+                ) : tech.name === 'Express.js' ? (
+                  /* 2. Express.js: Pure vector with crisp white "ex" */
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 128 128"
+                    fill="currentColor"
+                    class="size-7 sm:size-9 object-contain text-white transition-transform duration-200 group-hover:scale-110"
+                  >
+                    <path d="M126.67 98.44c-4.56 1.16-7.38.05-9.91-3.75-5.68-8.51-11.95-16.63-18-24.9-.78-1.07-1.59-2.12-2.6-3.45C89 76 81.85 85.2 75.14 94.77c-2.4 3.42-4.92 4.91-9.4 3.7l26.92-36.13L67.6 29.71c4.31-.84 7.29-.41 9.93 3.45 5.83 8.52 12.26 16.63 18.67 25.21 6.45-8.55 12.8-16.67 18.8-25.11 2.41-3.42 5-4.72 9.33-3.46-3.28 4.35-6.49 8.63-9.72 12.88-4.36 5.73-8.64 11.53-13.16 17.14-1.61 2-1.35 3.3.09 5.19C109.9 76 118.16 87.1 126.67 98.44zM1.33 61.74c.72-3.61 1.2-7.29 2.2-10.83 6-21.43 30.6-30.34 47.5-17.06C60.93 41.64 63.39 52.62 62.9 65H7.1c-.84 22.21 15.15 35.62 35.53 28.78 7.15-2.4 11.36-8 13.47-15 1.07-3.51 2.84-4.06 6.14-3.06-1.69 8.76-5.52 16.08-13.52 20.66-12 6.86-29.13 4.64-38.14-4.89C5.26 85.89 3 78.92 2 71.39c-.15-1.2-.46-2.38-.7-3.57q.03-3.04.03-6.08zm5.87-1.49h50.43c-.33-16.06-10.33-27.47-24-27.57-15-.12-25.78 11.02-26.43 27.57z"/>
+                  </svg>
+                ) : (
+                  /* 3. General Devicon Logos */
+                  <img
+                    src={tech.icon}
+                    alt={tech.name}
+                    loading="lazy"
+                    class:list={[
+                      "size-7 sm:size-9 object-contain transition-transform duration-200 group-hover:scale-110",
+                      shouldInvert && "tech-logo-invert"
+                    ]}
+                    onerror="this.style.display='none'"
+                  />
+                )}
+
+                <!-- Floating Minimal Tooltip on Hover -->
+                <div
+                  role="tooltip"
+                  class="pointer-events-none absolute -top-9 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 group-hover:-translate-y-1 group-focus-visible:-translate-y-1 transition-all duration-150 z-30 px-2.5 py-1 rounded-md bg-zinc-900 text-white dark:bg-white dark:text-zinc-900 text-[11px] font-mono font-medium whitespace-nowrap shadow-xl border border-white/10 dark:border-zinc-300"
+                >
+                  {tech.name}
+                  <!-- Tooltip Caret -->
+                  <div class="absolute -bottom-1 left-1/2 -translate-x-1/2 size-2 rotate-45 bg-zinc-900 dark:bg-white border-r border-b border-white/10 dark:border-zinc-300"></div>
+                </div>
+
+                <span class="sr-only">{tech.name}</span>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  /* 
+    Light theme (default): Dark container around every icon.
+    Visible ONLY in light theme.
+  */
+  .tech-icon-box {
+    background-color: #18181b !important;
+    border: 1px solid #27272a !important;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.25) !important;
+  }
+
+  .tech-icon-box:hover {
+    border-color: #3f3f46 !important;
+  }
+
+  /*
+    Dark theme (when html has .dark):
+    Container DISAPPEARS completely (transparent).
+    Logos float directly on the dark canvas.
+  */
+  :global(.dark) .tech-icon-box {
+    background-color: transparent !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
+  }
+
+  :global(.dark) .tech-icon-box:hover {
+    border-color: transparent !important;
+  }
+
+  .tech-logo-invert {
+    filter: invert(1);
+  }
+</style>

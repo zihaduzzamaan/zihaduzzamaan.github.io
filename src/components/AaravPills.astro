@@ -1,0 +1,109 @@
+---
+// Aarav Sharma's Tactile Action Pills
+// Visually differentiated "Available for Work" badge + 3 compact circular tactile buttons (GitHub, Resume, LinkedIn)
+---
+
+<div class="flex flex-row sm:flex-col items-center justify-between sm:justify-center w-full sm:w-auto gap-2.5 sm:gap-2">
+  <!-- Visually Differentiated "Available for Work" Pill with Elegant Perimeter Shimmer (No Blinking Dot) -->
+  <a
+    href="mailto:zihaduzzamanzishan@gmail.com?subject=Work%20Inquiry%20-%20MD%20Zihaduzzaman"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="group relative inline-flex overflow-hidden rounded-full p-[1px] focus:outline-none transition-all duration-200 ease-out hover:scale-105 active:scale-95 select-none shrink-0"
+    style="background: rgba(16, 185, 129, 0.22);"
+    title="Currently Available for Software Engineering & Full-Stack Projects"
+  >
+    <!-- Minimal & Elegant Rotating Shimmer Beam Around the Border -->
+    <span
+      class="shimmer-beam absolute inset-[-1000%]"
+      style="
+        background: conic-gradient(from 90deg at 50% 50%, transparent 0%, rgba(16, 185, 129, 0.1) 25%, #34d399 50%, rgba(16, 185, 129, 0.1) 75%, transparent 100%);
+      "
+    ></span>
+
+    <!-- Tactile Inner Pill Container -->
+    <span
+      class="relative inline-flex h-7 items-center justify-center rounded-full px-2.5 sm:px-3 text-[10.5px] sm:text-[11px] font-semibold text-emerald-300 backdrop-blur-xl transition-colors group-hover:text-emerald-100"
+      style="
+        background: linear-gradient(135deg, rgba(6, 78, 59, 0.6) 0%, rgba(16, 24, 20, 0.95) 100%);
+        box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.15), 0 2px 8px -1px rgba(16, 185, 129, 0.25);
+      "
+    >
+      <span class="tracking-tight font-medium">Available for Work</span>
+    </span>
+  </a>
+
+  <!-- Tactile Pill Buttons Row (Side-by-Side with Available for Work on Mobile) -->
+  <div class="flex items-center justify-center gap-1.5 sm:gap-2 shrink-0">
+    <!-- 1. GitHub -->
+    <a
+      href="https://github.com/mdzihaduzzaman"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="GitHub Profile"
+      title="GitHub"
+      class="group relative flex h-7 w-7 items-center justify-center rounded-full border border-zinc-200 bg-white text-zinc-700 shadow-2xs hover:border-zinc-300 hover:bg-zinc-50 hover:text-zinc-950 dark:border-white/14 dark:bg-[#1c1c1f] dark:text-zinc-300 dark:hover:text-white transition-all duration-150 ease-out hover:scale-105 active:scale-95"
+      style="
+        box-shadow: var(--pill-shadow, 0 1px 2px rgba(0, 0, 0, 0.05));
+      "
+    >
+      <svg class="h-3.5 w-3.5 fill-current" viewBox="0 0 24 24">
+        <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+      </svg>
+    </a>
+
+    <!-- 2. Resume / CV (Paperclip icon) -->
+    <a
+      href="mailto:zihaduzzamanzishan@gmail.com?subject=Resume%20Request%20-%20MD%20Zihaduzzaman"
+      aria-label="Resume / CV"
+      title="Request Resume / CV"
+      class="group relative flex h-7 w-7 items-center justify-center rounded-full border border-zinc-200 bg-white text-zinc-700 shadow-2xs hover:border-zinc-300 hover:bg-zinc-50 hover:text-zinc-950 dark:border-white/14 dark:bg-[#1c1c1f] dark:text-zinc-300 dark:hover:text-white transition-all duration-150 ease-out hover:scale-105 active:scale-95"
+      style="
+        box-shadow: var(--pill-shadow, 0 1px 2px rgba(0, 0, 0, 0.05));
+      "
+    >
+      <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48"/>
+      </svg>
+    </a>
+
+    <!-- 3. LinkedIn ('in' icon) -->
+    <a
+      href="https://linkedin.com/in/mdzihaduzzaman"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="LinkedIn Profile"
+      title="LinkedIn"
+      class="group relative flex h-7 w-7 items-center justify-center rounded-full border border-zinc-200 bg-white text-zinc-700 shadow-2xs hover:border-zinc-300 hover:bg-zinc-50 hover:text-zinc-950 dark:border-white/14 dark:bg-[#1c1c1f] dark:text-zinc-300 dark:hover:text-white transition-all duration-150 ease-out hover:scale-105 active:scale-95"
+      style="
+        box-shadow: var(--pill-shadow, 0 1px 2px rgba(0, 0, 0, 0.05));
+      "
+    >
+      <svg class="h-3 w-3 fill-current" viewBox="0 0 24 24">
+        <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
+      </svg>
+    </a>
+  </div>
+</div>
+
+<style>
+  .shimmer-beam {
+    animation: spin-beam 3.5s linear infinite;
+    will-change: transform;
+  }
+
+  @keyframes spin-beam {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .shimmer-beam {
+      animation: none;
+    }
+  }
+</style>

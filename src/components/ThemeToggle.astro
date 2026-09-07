@@ -1,0 +1,77 @@
+---
+// Zero-runtime Theme Switcher Component
+---
+
+<button
+  id="theme-toggle"
+  type="button"
+  aria-label="Toggle theme"
+  class="relative inline-flex h-8 w-8 items-center justify-center rounded-lg border border-[var(--border)] bg-[var(--badge-bg)] text-[var(--foreground)] transition-colors hover:bg-[var(--accent)] active:scale-95 focus:outline-none"
+>
+  <!-- Moon Icon (Dark Mode) -->
+  <svg
+    id="theme-moon"
+    class="hidden h-4 w-4 text-[var(--foreground)]"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+  </svg>
+
+  <!-- Sun Icon (Light Mode) -->
+  <svg
+    id="theme-sun"
+    class="hidden h-4 w-4 text-[var(--foreground)]"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <circle cx="12" cy="12" r="4"></circle>
+    <path d="M12 2v2"></path>
+    <path d="M12 20v2"></path>
+    <path d="m4.93 4.93 1.41 1.41"></path>
+    <path d="m17.66 17.66 1.41 1.41"></path>
+    <path d="M2 12h2"></path>
+    <path d="M20 12h2"></path>
+    <path d="m6.34 17.66-1.41 1.41"></path>
+    <path d="m19.07 4.93-1.41 1.41"></path>
+  </svg>
+</button>
+
+<script is:inline>
+  function updateThemeIcons() {
+    const isDark = document.documentElement.classList.contains('dark');
+    const moon = document.getElementById('theme-moon');
+    const sun = document.getElementById('theme-sun');
+    if (moon && sun) {
+      if (isDark) {
+        moon.classList.add('hidden');
+        sun.classList.remove('hidden');
+      } else {
+        sun.classList.add('hidden');
+        moon.classList.remove('hidden');
+      }
+    }
+  }
+
+  // Initial update
+  updateThemeIcons();
+
+  const toggleBtn = document.getElementById('theme-toggle');
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', () => {
+      const isDark = document.documentElement.classList.toggle('dark');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      updateThemeIcons();
+    });
+  }
+</script>

@@ -1,0 +1,77 @@
+---
+import type { Project } from '../data/portfolioData';
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+---
+
+<article class="group/item flex flex-col rounded-xl border border-[var(--border)] bg-[var(--card)] p-2 shadow-xs transition-[border-color,box-shadow] duration-200 hover:border-zinc-400/60 dark:hover:border-zinc-500/60 hover:shadow-md">
+  <!-- 16:9 Aspect Preview Thumbnail -->
+  <div class="relative aspect-video w-full overflow-hidden rounded-lg border border-[var(--border)] bg-zinc-950 flex items-center justify-center">
+    <img
+      src={project.image}
+      alt={project.title}
+      loading="lazy"
+      decoding="async"
+      class="h-full w-full object-contain sm:object-cover object-center transition-transform duration-300 group-hover/item:scale-[1.02]"
+    />
+
+    <!-- Floating Badge on Thumbnail -->
+    {project.badgeTitle && (
+      <span class="absolute right-2.5 top-2.5 z-10 rounded-md border border-[var(--border)] bg-[var(--background)]/90 backdrop-blur-xs px-2 py-0.5 font-mono text-[10px] font-semibold text-[var(--foreground)] shadow-xs">
+        {project.badgeTitle}
+      </span>
+    )}
+
+    <!-- Hover Overlay Gradient -->
+    <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover/item:opacity-100 pointer-events-none"></div>
+  </div>
+
+  <!-- Content -->
+  <div class="flex flex-1 flex-col justify-between p-2 pt-3">
+    <div>
+      <div class="flex items-start justify-between gap-2">
+        <h3 class="text-sm font-semibold tracking-tight text-[var(--foreground)] group-hover/item:text-emerald-500 dark:group-hover/item:text-emerald-400 transition-colors">
+          <a
+            href={project.demoUrl || project.githubUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hover:underline"
+          >
+            {project.title}
+          </a>
+        </h3>
+
+        <!-- External Link Icon -->
+        <a
+          href={project.demoUrl || project.githubUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--badge-bg)] text-[var(--muted-foreground)] transition-colors duration-150 group-hover/item:border-zinc-400/60 group-hover/item:text-[var(--foreground)] hover:bg-[var(--accent)]"
+          aria-label={`Open ${project.title}`}
+        >
+          <svg class="h-3 w-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7 7h10v10"></path>
+            <path d="M7 17 17 7"></path>
+          </svg>
+        </a>
+      </div>
+
+      <p class="mt-1.5 line-clamp-2 text-xs leading-relaxed text-[var(--muted-foreground)]">
+        {project.description}
+      </p>
+    </div>
+
+    <!-- Tech Stack Pills -->
+    <div class="mt-3 flex flex-wrap gap-1">
+      {project.tags.map((tag) => (
+        <span class="rounded-md border border-[var(--border)] bg-[var(--badge-bg)] px-2 py-0.5 font-mono text-[10px] font-medium text-[var(--muted-foreground)] transition-colors duration-150 group-hover/item:border-zinc-400/30 group-hover/item:text-[var(--foreground)]">
+          {tag}
+        </span>
+      ))}
+    </div>
+  </div>
+</article>

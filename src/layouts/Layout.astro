@@ -1,0 +1,92 @@
+---
+import '../styles/global.css';
+import PullCord from '../components/PullCord.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "MD Zihaduzzaman | Full Stack Web Developer & Software Engineer",
+  description = "Portfolio of MD Zihaduzzaman. Full Stack Web Developer, Software Engineer, and aspiring Data Engineer. Software Engineering 2nd Year student with Golden GPA 5.00 in SSC & HSC."
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Google Fonts: Outfit (Elegant Modern Font) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+    <!-- Primary Meta Tags -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <meta name="keywords" content="MD Zihaduzzaman, Zihaduzzaman, Full Stack Developer, Software Engineer, Data Engineering, Software Engineering Student, React, Astro, Next.js, Node.js, PostgreSQL, Dhaka, Bangladesh" />
+    <meta name="author" content="MD Zihaduzzaman" />
+    <meta name="theme-color" content="#09090b" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:site_name" content="MD Zihaduzzaman Portfolio" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+
+    <!-- Prevent FOUC: Instant Dark/Light Theme Script -->
+    <script is:inline>
+      const theme = (() => {
+        if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+          return localStorage.getItem('theme');
+        }
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          return 'dark';
+        }
+        return 'dark'; // default to sleek dark mode
+      })();
+      if (theme === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    </script>
+  </head>
+  <body class="min-h-screen bg-[var(--background)] text-[var(--foreground)] antialiased transition-colors duration-200 overflow-x-hidden">
+    <!-- Abdul Rehman Waseem Signature Verlet Physics Pull Cord -->
+    <PullCord />
+
+    <!-- Outer Framed Container with Increased Width (Aarav Sharma Style max-w-5xl) -->
+    <div class="relative mx-auto max-w-5xl min-h-screen">
+      <!-- Left Vertical Hatched Gutter (60px) -->
+      <div class="pointer-events-none absolute left-0 top-0 hidden h-full w-[60px] overflow-hidden sm:block z-0" aria-hidden="true">
+        <div class="absolute inset-0 h-full w-[60px] border-r border-[var(--edge)] bg-black/[0.006] dark:bg-white/[0.008] text-[var(--foreground)] [mask-image:linear-gradient(to_bottom,transparent,black_4%,black_96%,transparent)]">
+          <div class="hatched-pattern absolute inset-0 h-full w-full"></div>
+        </div>
+      </div>
+
+      <!-- Right Vertical Hatched Gutter (60px) -->
+      <div class="pointer-events-none absolute right-0 top-0 hidden h-full w-[60px] overflow-hidden sm:block z-0" aria-hidden="true">
+        <div class="absolute inset-0 h-full w-[60px] border-l border-[var(--edge)] bg-black/[0.006] dark:bg-white/[0.008] text-[var(--foreground)] [mask-image:linear-gradient(to_bottom,transparent,black_4%,black_96%,transparent)]">
+          <div class="hatched-pattern absolute inset-0 h-full w-full"></div>
+        </div>
+      </div>
+
+      <!-- Main Central Portfolio Container -->
+      <div class="relative z-10 mx-auto w-full sm:w-[calc(100%-120px)] border-x-0 sm:border-x border-[var(--edge)] bg-[var(--background)] shadow-2xl transition-colors duration-200">
+        <slot />
+      </div>
+    </div>
+  </body>
+</html>

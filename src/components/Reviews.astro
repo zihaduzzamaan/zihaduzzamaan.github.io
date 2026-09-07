@@ -1,0 +1,362 @@
+---
+// Abdur Rehman Waseem Signature Review & Testimonial Marquee Carousel
+// Exact 2-row continuous looping carousel with verified badges and authentic quotes
+
+export interface ReviewItem {
+  authorAvatar: string;
+  authorName: string;
+  authorBio: string;
+  url: string;
+  quote: string;
+}
+
+const REVIEWS_ROW_1: ReviewItem[] = [
+  {
+    authorAvatar: "https://robohash.org/SpaceFacts?set=set3&bgset=bg1&size=64x64",
+    authorName: "Space Facts Client",
+    authorBio: "iOS Educational App",
+    url: "https://apps.apple.com/us/app/space-facts-explorer/id6749238944",
+    quote: "Turned my 9 year old's dream into reality! My son loves sharing it with friends."
+  },
+  {
+    authorAvatar: "https://robohash.org/TruerEHR?set=set1&bgset=bg2&size=64x64",
+    authorName: "Truer EHR Team",
+    authorBio: "Healthcare Dashboard",
+    url: "https://ehr-dashboard-nine.vercel.app",
+    quote: "Excellent frontend work with complex APIs. Delivered stable patient management features."
+  },
+  {
+    authorAvatar: "https://robohash.org/FarazMahmood?set=set1&bgset=bg1&size=64x64",
+    authorName: "Faraz Mahmood",
+    authorBio: "Founder @forrof.io",
+    url: "https://www.forrof.io",
+    quote: "Attention to detail and quality work are truly commendable."
+  },
+  {
+    authorAvatar: "https://robohash.org/RallyTyper?set=set1&bgset=bg1&size=64x64",
+    authorName: "RallyTyper Team",
+    authorBio: "Free Online Typing Game",
+    url: "https://rallytyper.com",
+    quote: "Built our admin dashboard with CMS. Exceptional problem-solving skills!"
+  },
+  {
+    authorAvatar: "https://robohash.org/Khrimisay?set=set2&bgset=bg2&size=64x64",
+    authorName: "Khrimisay Dev Team",
+    authorBio: "Messaging Platform",
+    url: "https://dev.khrimisay.com",
+    quote: "Fixed critical PWA bugs that blocked us for weeks. Great debugging skills!"
+  },
+  {
+    authorAvatar: "https://robohash.org/Fynosign?set=set4&bgset=bg2&size=64x64",
+    authorName: "Fynosign Client",
+    authorBio: "E-Signature Platform",
+    url: "https://fynosign.com",
+    quote: "Built our entire SaaS platform. Solved the hardest PDF signing challenge. Production-ready!"
+  },
+  {
+    authorAvatar: "https://robohash.org/Fitreps?set=set2&bgset=bg1&size=64x64",
+    authorName: "Fitreps Team",
+    authorBio: "Fitness Platform",
+    url: "https://www.fitreps.com",
+    quote: "Redesigned our UI from boring to modern. Even created dark mode from scratch!"
+  }
+];
+
+const REVIEWS_ROW_2: ReviewItem[] = [
+  {
+    authorAvatar: "https://robohash.org/EdTech?set=set3&bgset=bg1&size=64x64",
+    authorName: "EdTech Platform Team",
+    authorBio: "Learning Management System",
+    url: "#",
+    quote: "Refactored our auth flow with Redux. Made registration much cleaner."
+  },
+  {
+    authorAvatar: "https://robohash.org/LeadSmart?set=set2&bgset=bg2&size=64x64",
+    authorName: "Lead Smart Team",
+    authorBio: "Affiliate Marketing Dashboard",
+    url: "#",
+    quote: "Cleaned up our messy codebase. Dashboard is now much more maintainable."
+  },
+  {
+    authorAvatar: "https://robohash.org/LoopIQ?set=set4&bgset=bg2&size=64x64",
+    authorName: "LoopIQ Team",
+    authorBio: "Healthcare Management",
+    url: "https://www.loopiq.xyz",
+    quote: "Delivers clean, scalable components. Great collaboration on production deployments."
+  },
+  {
+    authorAvatar: "https://robohash.org/StallBedding?set=set3&bgset=bg2&size=64x64",
+    authorName: "Bedding Calculator Client",
+    authorBio: "Horse Stall Calculator",
+    url: "https://bedding-calculator.netlify.app",
+    quote: "Made complex calculations simple with pure HTML/CSS/JS. Fully responsive!"
+  },
+  {
+    authorAvatar: "https://robohash.org/ZasDashboard?set=set4&bgset=bg1&size=64x64",
+    authorName: "Zas Analytics Team",
+    authorBio: "Employment Analytics",
+    url: "https://zas-dashboard-v12n.vercel.app",
+    quote: "Transformed 100k+ rows into clear insights. Made complex data accessible."
+  },
+  {
+    authorAvatar: "https://robohash.org/Precision?set=set1&bgset=bg1&size=64x64",
+    authorName: "Precision Platform Team",
+    authorBio: "Real Estate Due Diligence",
+    url: "#",
+    quote: "Rebuilt our CSV module. Drastically reduced upload errors for our brokers."
+  }
+];
+---
+
+<section id="reviews" class="relative w-full border-b border-[var(--edge)] bg-[var(--background)] transition-colors duration-200">
+  <!-- Section Title Header Bar -->
+  <div class="border-b border-[var(--edge)] px-3.5 sm:px-6 py-3.5 sm:py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1.5 sm:gap-2 bg-[var(--background)]">
+    <h2 class="text-lg sm:text-2xl font-bold tracking-tight text-[var(--foreground)] uppercase">
+      Reviews & Testimonials
+    </h2>
+    <div class="flex items-center gap-2 text-xs font-mono text-[var(--muted-foreground)]">
+      <span class="inline-block size-2 rounded-full bg-emerald-500 animate-pulse"></span>
+      <span>13 Verified Endorsements</span>
+    </div>
+  </div>
+
+  <!-- Marquee Container with Space Between Rows -->
+  <div class="relative w-full overflow-hidden select-none flex flex-col gap-2.5 sm:gap-4 py-2 sm:py-4">
+    <!-- Row 1: Leftward Scroll -->
+    <div class="marquee-group relative w-full overflow-hidden border-y border-[var(--edge)]">
+      <!-- Gradient Fades on Left & Right -->
+      <div class="pointer-events-none absolute left-0 top-0 bottom-0 z-10 w-8 sm:w-28 bg-gradient-to-r from-[var(--background)] to-transparent"></div>
+      <div class="pointer-events-none absolute right-0 top-0 bottom-0 z-10 w-8 sm:w-28 bg-gradient-to-l from-[var(--background)] to-transparent"></div>
+
+      <div class="marquee-track marquee-scroll-left">
+        <!-- Original List -->
+        {REVIEWS_ROW_1.map((item) => (
+          <div class="review-card flex flex-col justify-between w-[260px] sm:w-[340px] shrink-0 border-r border-[var(--edge)] bg-[var(--background)] hover:bg-zinc-50 dark:hover:bg-zinc-900/50 transition-colors duration-150">
+            <blockquote class="p-3.5 sm:p-5 text-xs sm:text-base italic text-zinc-700 dark:text-zinc-200 leading-relaxed font-sans grow">
+              "{item.quote}"
+            </blockquote>
+
+            <figcaption class="border-t border-dashed border-[var(--edge)] px-3.5 py-2.5 sm:px-4 sm:py-3 flex items-center gap-2.5 sm:gap-3 bg-zinc-50/50 dark:bg-zinc-900/30">
+              <div class="relative size-7 sm:size-8 shrink-0">
+                <img
+                  src={item.authorAvatar}
+                  alt={item.authorName}
+                  loading="lazy"
+                  class="size-7 sm:size-8 rounded-full object-cover select-none bg-zinc-200 dark:bg-zinc-800"
+                />
+                <div class="pointer-events-none absolute inset-0 rounded-full ring-1 ring-black/10 ring-inset dark:ring-white/15"></div>
+              </div>
+
+              <div class="min-w-0 flex-1">
+                <div class="flex items-center gap-1.5">
+                  <a
+                    href={item.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-xs sm:text-sm font-semibold text-[var(--foreground)] truncate hover:underline"
+                  >
+                    {item.authorName}
+                  </a>
+                  <!-- Verified Blue Checkmark Badge -->
+                  <svg
+                    class="size-3.5 shrink-0 text-sky-500 fill-current"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    aria-label="Verified"
+                  >
+                    <path d="M24 12a4.454 4.454 0 0 0-2.564-3.91 4.437 4.437 0 0 0-.948-4.578 4.436 4.436 0 0 0-4.577-.948A4.44 4.44 0 0 0 12 0a4.423 4.423 0 0 0-3.9 2.564 4.434 4.434 0 0 0-2.43-.178 4.425 4.425 0 0 0-2.158 1.126 4.42 4.42 0 0 0-1.12 2.156 4.42 4.42 0 0 0 .183 2.421A4.456 4.456 0 0 0 0 12a4.465 4.465 0 0 0 2.576 3.91 4.433 4.433 0 0 0 .936 4.577 4.459 4.459 0 0 0 4.577.95A4.454 4.454 0 0 0 12 24a4.439 4.439 0 0 0 3.91-2.563 4.26 4.26 0 0 0 5.526-5.526A4.453 4.453 0 0 0 24 12Zm-13.709 4.917-4.38-4.378 1.652-1.663 2.646 2.646L15.83 7.4l1.72 1.591-7.258 7.926Z" />
+                  </svg>
+                </div>
+                <p class="text-[11px] sm:text-xs text-[var(--muted-foreground)] truncate">
+                  {item.authorBio}
+                </p>
+              </div>
+            </figcaption>
+          </div>
+        ))}
+
+        <!-- Duplicate Clone for 100% Seamless Infinite Marquee -->
+        {REVIEWS_ROW_1.map((item) => (
+          <div aria-hidden="true" class="review-card flex flex-col justify-between w-[260px] sm:w-[340px] shrink-0 border-r border-[var(--edge)] bg-[var(--background)] hover:bg-zinc-50 dark:hover:bg-zinc-900/50 transition-colors duration-150">
+            <blockquote class="p-3.5 sm:p-5 text-xs sm:text-base italic text-zinc-700 dark:text-zinc-200 leading-relaxed font-sans grow">
+              "{item.quote}"
+            </blockquote>
+
+            <figcaption class="border-t border-dashed border-[var(--edge)] px-3.5 py-2.5 sm:px-4 sm:py-3 flex items-center gap-2.5 sm:gap-3 bg-zinc-50/50 dark:bg-zinc-900/30">
+              <div class="relative size-7 sm:size-8 shrink-0">
+                <img
+                  src={item.authorAvatar}
+                  alt={item.authorName}
+                  loading="lazy"
+                  class="size-7 sm:size-8 rounded-full object-cover select-none bg-zinc-200 dark:bg-zinc-800"
+                />
+                <div class="pointer-events-none absolute inset-0 rounded-full ring-1 ring-black/10 ring-inset dark:ring-white/15"></div>
+              </div>
+
+              <div class="min-w-0 flex-1">
+                <div class="flex items-center gap-1.5">
+                  <span class="text-xs sm:text-sm font-semibold text-[var(--foreground)] truncate">
+                    {item.authorName}
+                  </span>
+                  <svg
+                    class="size-3.5 shrink-0 text-sky-500 fill-current"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    aria-label="Verified"
+                  >
+                    <path d="M24 12a4.454 4.454 0 0 0-2.564-3.91 4.437 4.437 0 0 0-.948-4.578 4.436 4.436 0 0 0-4.577-.948A4.44 4.44 0 0 0 12 0a4.423 4.423 0 0 0-3.9 2.564 4.434 4.434 0 0 0-2.43-.178 4.425 4.425 0 0 0-2.158 1.126 4.42 4.42 0 0 0-1.12 2.156 4.42 4.42 0 0 0 .183 2.421A4.456 4.456 0 0 0 0 12a4.465 4.465 0 0 0 2.576 3.91 4.433 4.433 0 0 0 .936 4.577 4.459 4.459 0 0 0 4.577.95A4.454 4.454 0 0 0 12 24a4.439 4.439 0 0 0 3.91-2.563 4.26 4.26 0 0 0 5.526-5.526A4.453 4.453 0 0 0 24 12Zm-13.709 4.917-4.38-4.378 1.652-1.663 2.646 2.646L15.83 7.4l1.72 1.591-7.258 7.926Z" />
+                  </svg>
+                </div>
+                <p class="text-[11px] sm:text-xs text-[var(--muted-foreground)] truncate">
+                  {item.authorBio}
+                </p>
+              </div>
+            </figcaption>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Row 2: Rightward Scroll -->
+    <div class="marquee-group relative w-full overflow-hidden border-y border-[var(--edge)]">
+      <!-- Gradient Fades on Left & Right -->
+      <div class="pointer-events-none absolute left-0 top-0 bottom-0 z-10 w-8 sm:w-28 bg-gradient-to-r from-[var(--background)] to-transparent"></div>
+      <div class="pointer-events-none absolute right-0 top-0 bottom-0 z-10 w-8 sm:w-28 bg-gradient-to-l from-[var(--background)] to-transparent"></div>
+
+      <div class="marquee-track marquee-scroll-right">
+        <!-- Original List -->
+        {REVIEWS_ROW_2.map((item) => (
+          <div class="review-card flex flex-col justify-between w-[260px] sm:w-[340px] shrink-0 border-r border-[var(--edge)] bg-[var(--background)] hover:bg-zinc-50 dark:hover:bg-zinc-900/50 transition-colors duration-150">
+            <blockquote class="p-3.5 sm:p-5 text-xs sm:text-base italic text-zinc-700 dark:text-zinc-200 leading-relaxed font-sans grow">
+              "{item.quote}"
+            </blockquote>
+
+            <figcaption class="border-t border-dashed border-[var(--edge)] px-3.5 py-2.5 sm:px-4 sm:py-3 flex items-center gap-2.5 sm:gap-3 bg-zinc-50/50 dark:bg-zinc-900/30">
+              <div class="relative size-7 sm:size-8 shrink-0">
+                <img
+                  src={item.authorAvatar}
+                  alt={item.authorName}
+                  loading="lazy"
+                  class="size-7 sm:size-8 rounded-full object-cover select-none bg-zinc-200 dark:bg-zinc-800"
+                />
+                <div class="pointer-events-none absolute inset-0 rounded-full ring-1 ring-black/10 ring-inset dark:ring-white/15"></div>
+              </div>
+
+              <div class="min-w-0 flex-1">
+                <div class="flex items-center gap-1.5">
+                  <a
+                    href={item.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-xs sm:text-sm font-semibold text-[var(--foreground)] truncate hover:underline"
+                  >
+                    {item.authorName}
+                  </a>
+                  <svg
+                    class="size-3.5 shrink-0 text-sky-500 fill-current"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    aria-label="Verified"
+                  >
+                    <path d="M24 12a4.454 4.454 0 0 0-2.564-3.91 4.437 4.437 0 0 0-.948-4.578 4.436 4.436 0 0 0-4.577-.948A4.44 4.44 0 0 0 12 0a4.423 4.423 0 0 0-3.9 2.564 4.434 4.434 0 0 0-2.43-.178 4.425 4.425 0 0 0-2.158 1.126 4.42 4.42 0 0 0-1.12 2.156 4.42 4.42 0 0 0 .183 2.421A4.456 4.456 0 0 0 0 12a4.465 4.465 0 0 0 2.576 3.91 4.433 4.433 0 0 0 .936 4.577 4.459 4.459 0 0 0 4.577.95A4.454 4.454 0 0 0 12 24a4.439 4.439 0 0 0 3.91-2.563 4.26 4.26 0 0 0 5.526-5.526A4.453 4.453 0 0 0 24 12Zm-13.709 4.917-4.38-4.378 1.652-1.663 2.646 2.646L15.83 7.4l1.72 1.591-7.258 7.926Z" />
+                  </svg>
+                </div>
+                <p class="text-[11px] sm:text-xs text-[var(--muted-foreground)] truncate">
+                  {item.authorBio}
+                </p>
+              </div>
+            </figcaption>
+          </div>
+        ))}
+
+        <!-- Duplicate Clone for 100% Seamless Infinite Marquee -->
+        {REVIEWS_ROW_2.map((item) => (
+          <div aria-hidden="true" class="review-card flex flex-col justify-between w-[260px] sm:w-[340px] shrink-0 border-r border-[var(--edge)] bg-[var(--background)] hover:bg-zinc-50 dark:hover:bg-zinc-900/50 transition-colors duration-150">
+            <blockquote class="p-3.5 sm:p-5 text-xs sm:text-base italic text-zinc-700 dark:text-zinc-200 leading-relaxed font-sans grow">
+              "{item.quote}"
+            </blockquote>
+
+            <figcaption class="border-t border-dashed border-[var(--edge)] px-3.5 py-2.5 sm:px-4 sm:py-3 flex items-center gap-2.5 sm:gap-3 bg-zinc-50/50 dark:bg-zinc-900/30">
+              <div class="relative size-7 sm:size-8 shrink-0">
+                <img
+                  src={item.authorAvatar}
+                  alt={item.authorName}
+                  loading="lazy"
+                  class="size-7 sm:size-8 rounded-full object-cover select-none bg-zinc-200 dark:bg-zinc-800"
+                />
+                <div class="pointer-events-none absolute inset-0 rounded-full ring-1 ring-black/10 ring-inset dark:ring-white/15"></div>
+              </div>
+
+              <div class="min-w-0 flex-1">
+                <div class="flex items-center gap-1.5">
+                  <span class="text-xs sm:text-sm font-semibold text-[var(--foreground)] truncate">
+                    {item.authorName}
+                  </span>
+                  <svg
+                    class="size-3.5 shrink-0 text-sky-500 fill-current"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    aria-label="Verified"
+                  >
+                    <path d="M24 12a4.454 4.454 0 0 0-2.564-3.91 4.437 4.437 0 0 0-.948-4.578 4.436 4.436 0 0 0-4.577-.948A4.44 4.44 0 0 0 12 0a4.423 4.423 0 0 0-3.9 2.564 4.434 4.434 0 0 0-2.43-.178 4.425 4.425 0 0 0-2.158 1.126 4.42 4.42 0 0 0-1.12 2.156 4.42 4.42 0 0 0 .183 2.421A4.456 4.456 0 0 0 0 12a4.465 4.465 0 0 0 2.576 3.91 4.433 4.433 0 0 0 .936 4.577 4.459 4.459 0 0 0 4.577.95A4.454 4.454 0 0 0 12 24a4.439 4.439 0 0 0 3.91-2.563 4.26 4.26 0 0 0 5.526-5.526A4.453 4.453 0 0 0 24 12Zm-13.709 4.917-4.38-4.378 1.652-1.663 2.646 2.646L15.83 7.4l1.72 1.591-7.258 7.926Z" />
+                  </svg>
+                </div>
+                <p class="text-[11px] sm:text-xs text-[var(--muted-foreground)] truncate">
+                  {item.authorBio}
+                </p>
+              </div>
+            </figcaption>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    will-change: transform;
+  }
+
+  /* Row 1: Smooth Leftward Infinite Scroll (45s) */
+  .marquee-scroll-left {
+    animation: scroll-to-left 45s linear infinite;
+  }
+
+  /* Row 2: Smooth Rightward Infinite Scroll (45s) */
+  .marquee-scroll-right {
+    animation: scroll-to-right 45s linear infinite;
+  }
+
+  /* Hover pause for interactive reading */
+  .marquee-group:hover .marquee-track {
+    animation-play-state: paused;
+  }
+
+  @keyframes scroll-to-left {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes scroll-to-right {
+    0% {
+      transform: translateX(-50%);
+    }
+    100% {
+      transform: translateX(0%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-scroll-left,
+    .marquee-scroll-right {
+      animation: none;
+    }
+  }
+</style>
