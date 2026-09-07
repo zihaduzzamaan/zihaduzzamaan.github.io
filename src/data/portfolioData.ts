@@ -56,8 +56,8 @@ export const portfolioData = {
     socials: [
       {
         name: "GitHub",
-        username: "@mdzihaduzzaman",
-        url: "https://github.com/mdzihaduzzaman",
+        username: "@zihaduzzamaan",
+        url: "https://github.com/zihaduzzamaan",
         icon: "github",
       },
       {
@@ -89,7 +89,7 @@ export const portfolioData = {
       tags: ["React", "PHP", "MySQL", "Data Pipelines", "Esports", "REST APIs"],
       image: "/projects/refc.jpg",
       demoUrl: "https://refc.online",
-      githubUrl: "https://github.com/mdzihaduzzaman",
+      githubUrl: "https://github.com/zihaduzzamaan/refc",
       featured: true
     },
     {
@@ -98,8 +98,8 @@ export const portfolioData = {
       description: "On-device biometric attendance engine using Python InsightFace (RetinaFace + ArcFace 512D vectors). Re-engineered in native Kotlin for 30+ FPS and 8x faster latency over web.",
       tags: ["Kotlin Native", "Python", "InsightFace", "ArcFace", "React", "Edge AI"],
       image: "/projects/attenvo.jpg",
-      demoUrl: "https://github.com/mdzihaduzzaman",
-      githubUrl: "https://github.com/mdzihaduzzaman",
+      demoUrl: "https://github.com/zihaduzzamaan/Attenvo",
+      githubUrl: "https://github.com/zihaduzzamaan/Attenvo",
       featured: true
     },
     {
@@ -108,8 +108,8 @@ export const portfolioData = {
       description: "Full-stack commercial fashion e-commerce storefront and admin portal featuring dynamic product catalogs, inventory management, cart workflows, and secure order processing.",
       tags: ["React", "PHP", "MySQL", "REST APIs", "Tailwind CSS"],
       image: "/projects/piecestyle.jpg",
-      demoUrl: "https://github.com/mdzihaduzzaman",
-      githubUrl: "https://github.com/mdzihaduzzaman",
+      demoUrl: "https://github.com/zihaduzzamaan",
+      githubUrl: "https://github.com/zihaduzzamaan",
       featured: true
     },
     {
@@ -118,8 +118,8 @@ export const portfolioData = {
       description: "Centralized university support system with smart FAQ search, automated faculty mentorship scheduling, and confidential welfare grievance routing.",
       tags: ["React", "JavaScript", "REST APIs", "Calendar Booking", "CSS3"],
       image: "/projects/campus_welfare.jpg",
-      demoUrl: "https://github.com/mdzihaduzzaman",
-      githubUrl: "https://github.com/mdzihaduzzaman",
+      demoUrl: "https://github.com/zihaduzzamaan/Student_Welfare_System_DIU",
+      githubUrl: "https://github.com/zihaduzzamaan/Student_Welfare_System_DIU",
       featured: true
     },
     {
@@ -128,8 +128,8 @@ export const portfolioData = {
       description: "Curriculum scraper parsing technical developer roadmaps into actionable daily to-do milestones, featuring habit streaks, heatmaps, and local state persistence.",
       tags: ["Vanilla JavaScript", "HTML5", "CSS3", "Web Scraping", "LocalStorage"],
       image: "/projects/roadmap_tracker.jpg",
-      demoUrl: "https://github.com/mdzihaduzzaman",
-      githubUrl: "https://github.com/mdzihaduzzaman",
+      demoUrl: "https://github.com/zihaduzzamaan",
+      githubUrl: "https://github.com/zihaduzzamaan",
       featured: true
     },
     {
@@ -138,8 +138,8 @@ export const portfolioData = {
       description: "System utility suite pairing an Equalizer APO parametric sound calibrator with a dual-monitor DDC/CI hardware brightness, contrast, and color-temperature controller.",
       tags: ["Python", "Equalizer APO", "DDC/CI API", "Win32", "Hardware Control"],
       image: "/projects/hardware_suite.jpg",
-      demoUrl: "https://github.com/mdzihaduzzaman",
-      githubUrl: "https://github.com/mdzihaduzzaman",
+      demoUrl: "https://github.com/zihaduzzamaan",
+      githubUrl: "https://github.com/zihaduzzamaan",
       featured: true
     }
   ] as Project[],
