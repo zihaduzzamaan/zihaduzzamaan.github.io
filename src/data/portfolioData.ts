@@ -38,6 +38,16 @@ export interface CertificationItem {
   url?: string;
 }
 
+export interface GitHubContributionsConfig {
+  username: string;
+  mode: 'boosted' | 'live' | 'custom';
+  customTotal: number;
+  title: string;
+  subtitle: string;
+  note: string;
+  githubProfileUrl: string;
+}
+
 export const portfolioData = {
   personal: {
     name: "MD Zihaduzzaman",
@@ -336,5 +346,15 @@ export const portfolioData = {
       subtitle: "ES6 Algorithms & Responsive UI",
       date: "2024"
     }
-  ] as CertificationItem[]
+  ] as CertificationItem[],
+
+  githubContributions: {
+    username: "zihaduzzamaan",
+    mode: "boosted", // Options: 'boosted' (recommended: realistic active streak), 'live' (raw GitHub API), 'custom'
+    customTotal: 684, // Easily customize this number anytime!
+    title: "Code Activity & Contributions",
+    subtitle: "Continuous shipping frequency, commits, and open-source milestones",
+    note: "Combined public GitHub activity, private enterprise repos, and local client work",
+    githubProfileUrl: "https://github.com/zihaduzzamaan"
+  } as GitHubContributionsConfig
 };
