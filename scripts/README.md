@@ -104,40 +104,49 @@ python scripts/render_mockups.py
 
 ### 3. `render_mockups.py`
 * **Target Output**:
-  - `public/projects/campus_welfare.jpg` (1200 × 675)
-  - `public/projects/roadmap_tracker.jpg` (1200 × 675)
-  - `public/projects/hardware_suite.jpg` (1200 × 675)
-* **Aspect Ratio**: `16:9` (1.778 ratio)
+  - `public/projects/piecestyle.jpg` (1920 × 1080)
+  - `public/projects/campus_welfare.jpg` (1920 × 1080)
+  - `public/projects/roadmap_tracker.jpg` (1920 × 1080)
+  - `public/projects/hardware_suite.jpg` (1920 × 1080)
+* **Aspect Ratio**: `16:9` (1920 × 1080 Full HD)
 * **Projects**:
-  - **University Student Welfare & Mentorship Portal**
-  - **Roadmap & Daily Habit Tracker**
-  - **Desktop Hardware & Audio Utilities Suite**
+  - **PieceStyle: Commercial Fashion E-Commerce Platform**
+  - **CampusCare: University Student Welfare & Mentorship Portal**
+  - **DevRoadmap: Curriculum Scraper & Daily Habit Tracker**
+  - **AudioForge & DisplaySync: Win32 Hardware Utilities Suite**
 
 #### Features & Composition Architecture:
-1. **Native Dark Theme UI Architecture**:
-   - Programmatically renders clean application windows with title bars, system status dots, and subtle borders matching the portfolio's palette (`#0a0f1a`, `#0c0a18`, `#0a0f12`).
-2. **CampusCare Portal**:
-   - Faculty mentor directory with real DIU professor cards, avatar indicators, and availability status.
-   - Meeting booking interface with date/time selectors, agenda tags, and confirmed appointment cards.
-3. **DevRoadmap & Habit Tracker**:
-   - 3-column dashboard featuring active roadmaps (Full-Stack, Data Eng, Algorithms) with progress bars.
-   - 52-week habit streak commit matrix with varying activity heatmaps.
-   - Daily milestone checklist with completed and pending task states.
-4. **Hardware & Audio Utilities Suite**:
-   - Parametric audio equalizer window with 10-band interactive frequency sliders and DSP convolution stream status.
-   - Dual-monitor DDC/CI hardware brightness, contrast, and color temperature controller (Primary gaming panel + vertical reading panel).
+1. **Unified SaaS Hero Showcase Standard**:
+   - Each project features a **40% left branding column** with brand typography, humanized headlines, conversational descriptions, 4 custom-icon feature badges, audience/production status pill, and workflow progression steps with vector arrows.
+   - Each project features a **60% right visual column** with a floating browser window (`#0b0f19` chrome, traffic lights, URL pill) and an overlaid staggered card with deep Gaussian elevation drop shadows (`blur_radius=40-42px`).
+2. **PieceStyle**:
+   - Editorial dark luxury palette with champagne gold accents.
+   - Floating desktop fashion storefront (`piecestyle.com/collection`) with curated apparel product cards.
+   - Staggered elevated slide-out shopping bag drawer with subtotal calculation and 256-bit SSL checkout button.
+3. **CampusCare**:
+   - Trust collegiate navy and emerald palette.
+   - Faculty mentor directory with real DIU professor cards, department roles, and availability.
+   - Staggered elevated "Confirmed Appointment" advisory card with room location and virtual consultation action.
+4. **DevRoadmap**:
+   - Developer cyberpunk deep indigo and neon violet palette.
+   - Multi-track curriculum progression graph (Full-Stack, Data Eng, Algorithms).
+   - Staggered elevated 34-Day streak widget with 52-week activity commit matrix and daily milestone checklist.
+5. **AudioForge & DisplaySync**:
+   - Precision studio hardware teal and amber palette.
+   - 10-band parametric equalizer studio window with interactive dB sliders (32Hz to 16kHz) and 64-bit DSP status.
+   - Staggered elevated dual-monitor DDC/CI hardware controller with gaming 144Hz panel & vertical reading panel.
 
 ---
 
 ## 📐 Image Specification Standard
 
-| Asset | Source File | Dimensions | Aspect Ratio | Format |
+| Asset | Generator Script | Dimensions | Aspect Ratio | Format |
 |---|---|---|---|---|
 | `refc.jpg` | `scripts/build_refc_banner.py` | `1920 × 1080` | `16:9` | JPEG (Quality 95) |
 | `attenvo.jpg` | `scripts/build_attenvo_banner.py` | `1920 × 1080` | `16:9` | JPEG (Quality 96) |
-| `campus_welfare.jpg` | `scripts/render_mockups.py` | `1200 × 675` | `16:9` | JPEG (Quality 95) |
-| `roadmap_tracker.jpg` | `scripts/render_mockups.py` | `1200 × 675` | `16:9` | JPEG (Quality 95) |
-| `hardware_suite.jpg` | `scripts/render_mockups.py` | `1200 × 675` | `16:9` | JPEG (Quality 95) |
-| `piecestyle.jpg` | Pre-rendered | `1376 × 768` | `16:9` | JPEG (Quality 95) |
+| `piecestyle.jpg` | `scripts/render_mockups.py` | `1920 × 1080` | `16:9` | JPEG (Quality 95) |
+| `campus_welfare.jpg` | `scripts/render_mockups.py` | `1920 × 1080` | `16:9` | JPEG (Quality 95) |
+| `roadmap_tracker.jpg` | `scripts/render_mockups.py` | `1920 × 1080` | `16:9` | JPEG (Quality 95) |
+| `hardware_suite.jpg` | `scripts/render_mockups.py` | `1920 × 1080` | `16:9` | JPEG (Quality 95) |
 
-Every banner in `public/projects/` is strictly calibrated for CSS `aspect-video` (16:9), ensuring clean edge-to-edge presentation on mobile, tablet, and ultra-wide displays.
+Every banner in `public/projects/` is strictly calibrated for CSS `aspect-video` (16:9), ensuring clean edge-to-edge presentation across all viewport sizes.
