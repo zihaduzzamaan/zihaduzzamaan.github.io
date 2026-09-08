@@ -1,178 +1,230 @@
 ---
 // Authentic GitHub Contribution Graph
-// Matched 1:1 with GitHub's exact font stack, native theme colors, layout and medium contribution level (451 commits).
-// Zero unnecessary bloat: cleanly structured to match the official GitHub profile UI.
+// Matched 1:1 with GitHub's exact font stack, native theme colors, SVG vector rendering, and layout.
+// Zero border outlines, pixel-perfect month/day alignment, and zero right-side container gap.
+// Supports full multi-year switching (2020-2026) and mobile optimizations.
 
-import contributionsData from '../data/githubContributionsData.json';
+import multiYearData from '../data/githubMultiYearData.json';
 
-interface DayItem {
-  date: string;
-  count: number;
-  level: number;
-  formatted: string;
+const years = ['2026', '2025', '2024', '2023', '2022', '2021', '2020'];
+const activeYear = '2026';
+const initialData = (multiYearData as Record<string, any>)[activeYear];
+
+// Group 371 days into 53 weeks (Sunday to Saturday)
+// Each day tuple: [count, level, dateStr, formatted]
+const initialWeeks: any[][] = [];
+for (let i = 0; i < initialData.days.length; i += 7) {
+  initialWeeks.push(initialData.days.slice(i, i + 7));
 }
 
-const totalCount = contributionsData.total || 451;
-const rawContributions: DayItem[] = contributionsData.contributions;
-
-// Group 366 days into 53 weeks (Sunday to Saturday)
-const weeks: DayItem[][] = [];
-for (let i = 0; i < rawContributions.length; i += 7) {
-  weeks.push(rawContributions.slice(i, i + 7));
-}
-
-// 12 Month positions based on first occurrence of each month (matching GitHub exactly)
-const monthsList = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-const monthLabels: { col: number; label: string }[] = [];
-let lastMonth = -1;
-
-for (let i = 0; i < rawContributions.length; i += 7) {
-  const item = rawContributions[i];
-  const d = new Date(item.date);
-  const m = d.getMonth();
-  const w = Math.floor(i / 7);
-  if (m !== lastMonth && w < 50) {
-    monthLabels.push({ col: w, label: monthsList[m] });
-    lastMonth = m;
-  }
-}
+// GitHub Authentic level color arrays
+// Level 0 has ZERO outline / border
+const darkFills = ["#161b22", "#0e4429", "#006d32", "#26a641", "#39d353"];
+const lightFills = ["#ebedf0", "#9be9a8", "#40c463", "#30a14e", "#216e39"];
 ---
 
-<section id="activity" class="py-10 px-4 max-w-5xl mx-auto" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';">
-  <!-- Top bar: Total count & Contribution settings -->
-  <div class="flex items-center justify-between mb-2 px-1">
-    <h2 class="text-[16px] font-normal text-[#1f2328] dark:text-[#e6edf3]">
-      <span id="github-total-count">{totalCount}</span> contributions in the last year
-    </h2>
-
-    <!-- Contribution settings dropdown -->
-    <div class="relative">
-      <button
-        id="contrib-settings-btn"
-        type="button"
-        class="text-[12px] text-[#656d76] dark:text-[#7d8590] hover:text-[#1f2328] dark:hover:text-[#e6edf3] inline-flex items-center gap-1 cursor-pointer transition-colors"
-      >
-        <span>Contribution settings</span>
-        <svg class="w-3 h-3 text-[#656d76] dark:text-[#7d8590]" viewBox="0 0 16 16" fill="currentColor">
-          <path d="m4.427 7.427 3.396 3.396a.25.25 0 0 0 .354 0l3.396-3.396A.25.25 0 0 0 11.396 7H4.604a.25.25 0 0 0-.177.427Z"></path>
-        </svg>
-      </button>
-
-      <!-- Dropdown -->
-      <div
-        id="contrib-settings-menu"
-        class="hidden absolute right-0 mt-1.5 w-60 rounded-md bg-white dark:bg-[#161b22] border border-zinc-200 dark:border-[#30363d] shadow-lg z-50 p-1 text-[12px]"
-      >
-        <a
-          href="https://github.com/zihaduzzamaan"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="flex items-center justify-between px-3 py-2 rounded text-[#1f2328] dark:text-[#e6edf3] hover:bg-zinc-100 dark:hover:bg-[#21262d] transition-colors"
-        >
-          <span>View on GitHub</span>
-          <span class="text-[#656d76] dark:text-[#7d8590]">@zihaduzzamaan ↗</span>
-        </a>
-        <a
-          href="https://docs.github.com/en/get-started/exploring-projects-on-github/viewing-contributions-on-your-profile"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="flex items-center justify-between px-3 py-2 rounded text-[#1f2328] dark:text-[#e6edf3] hover:bg-zinc-100 dark:hover:bg-[#21262d] transition-colors border-t border-zinc-100 dark:border-[#21262d]"
-        >
-          <span>Contribution guidelines</span>
-          <span class="text-[#656d76] dark:text-[#7d8590]">Docs ↗</span>
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <!-- Main GitHub Card Container -->
-  <div class="border border-zinc-200 dark:border-[#30363d] rounded-md bg-white dark:bg-[#0d1117] p-4 sm:p-5">
+<section id="activity" class="py-8 px-3.5 sm:px-4 mx-auto w-full max-w-5xl" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';">
+  <div class="flex flex-col lg:flex-row gap-5 items-start justify-center">
     
-    <!-- Heatmap Scrollable Wrapper -->
-    <div class="overflow-x-auto pb-1 scrollbar-none">
-      <div class="min-w-[740px] select-none text-[12px]">
-        
-        <!-- Months Labels Row -->
-        <div class="relative h-5 text-[#656d76] dark:text-[#7d8590] pl-8">
-          {monthLabels.map((m) => (
-            <span
-              class="absolute top-0 text-[12px]"
-              style={`left: ${32 + m.col * 13}px;`}
+    <!-- Main Left Column: Header + Mobile Year Selector + Heatmap Card -->
+    <div class="w-full max-w-[756px] shrink-0">
+      
+      <!-- Top bar: Total count & Contribution settings -->
+      <div class="flex items-center justify-between gap-2 mb-2 px-0.5">
+        <h2 class="text-[13px] min-[390px]:text-[14px] sm:text-[16px] font-normal text-[#1f2328] dark:text-[#e6edf3] whitespace-nowrap leading-tight shrink min-w-0">
+          <span id="github-total-count" class="font-semibold">{initialData.total.toLocaleString()}</span> <span id="github-year-suffix">contributions in the last year</span>
+        </h2>
+
+        <!-- Contribution settings dropdown -->
+        <div class="relative shrink-0">
+          <button
+            id="contrib-settings-btn"
+            type="button"
+            class="text-[11.5px] sm:text-[12px] text-[#656d76] dark:text-[#7d8590] hover:text-[#1f2328] dark:hover:text-[#e6edf3] inline-flex items-center gap-1 cursor-pointer transition-colors whitespace-nowrap py-0.5 px-1 rounded hover:bg-zinc-100 dark:hover:bg-[#21262d]"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <span class="hidden sm:inline">Contribution </span><span>settings</span>
+            <svg class="w-3 h-3 text-[#656d76] dark:text-[#7d8590] shrink-0" viewBox="0 0 16 16" fill="currentColor">
+              <path d="m4.427 7.427 3.396 3.396a.25.25 0 0 0 .354 0l3.396-3.396A.25.25 0 0 0 11.396 7H4.604a.25.25 0 0 0-.177.427Z"></path>
+            </svg>
+          </button>
+
+          <!-- Dropdown -->
+          <div
+            id="contrib-settings-menu"
+            class="hidden absolute right-0 mt-1.5 w-60 rounded-md bg-white dark:bg-[#161b22] border border-zinc-200 dark:border-[#30363d] shadow-lg z-50 p-1 text-[12px]"
+          >
+            <a
+              href="https://github.com/zihaduzzamaan"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center justify-between px-3 py-2 rounded text-[#1f2328] dark:text-[#e6edf3] hover:bg-zinc-100 dark:hover:bg-[#21262d] transition-colors"
             >
-              {m.label}
-            </span>
-          ))}
+              <span>View on GitHub</span>
+              <span class="text-[#656d76] dark:text-[#7d8590]">@zihaduzzamaan ↗</span>
+            </a>
+            <a
+              href="https://docs.github.com/en/get-started/exploring-projects-on-github/viewing-contributions-on-your-profile"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center justify-between px-3 py-2 rounded text-[#1f2328] dark:text-[#e6edf3] hover:bg-zinc-100 dark:hover:bg-[#21262d] transition-colors border-t border-zinc-100 dark:border-[#21262d]"
+            >
+              <span>Contribution guidelines</span>
+              <span class="text-[#656d76] dark:text-[#7d8590]">Docs ↗</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile Year Switcher Bar (Visible on mobile/tablets where desktop sidebar is hidden) -->
+      <div class="flex lg:hidden items-center gap-1.5 overflow-x-auto pb-1.5 mb-2.5 scrollbar-none select-none -mx-0.5 px-0.5">
+        {years.map((y) => (
+          <button
+            type="button"
+            data-year={y}
+            class={`gh-year-btn-mobile px-2.5 py-1 rounded-md text-[11.5px] font-medium whitespace-nowrap transition-all cursor-pointer ${
+              y === activeYear
+                ? 'bg-[#0969da] text-white font-semibold shadow-xs border border-[#0969da]'
+                : 'bg-zinc-100 dark:bg-[#161b22] text-[#656d76] dark:text-[#7d8590] border border-transparent dark:border-[#30363d]/50 hover:bg-zinc-200 dark:hover:bg-[#21262d]'
+            }`}
+          >
+            {y}
+          </button>
+        ))}
+      </div>
+
+      <!-- Main GitHub Card Container: Width tightly hugs the 722px SVG with 16px padding (Zero gap on the right) -->
+      <div class="border border-zinc-200 dark:border-[#30363d] rounded-md bg-white dark:bg-[#0d1117] p-3 sm:p-4">
+        
+        <!-- Heatmap Scrollable Wrapper with smooth mobile swipe and touch feel -->
+        <div
+          id="gh-scroll-container"
+          class="overflow-x-auto pb-1 scrollbar-none"
+          style="-webkit-overflow-scrolling: touch; overscroll-behavior-x: contain;"
+        >
+          <!-- Exact Official GitHub SVG Vector Calendar (722 x 112) -->
+          <svg
+            id="gh-calendar-svg"
+            width="722"
+            height="112"
+            viewBox="0 0 722 112"
+            class="select-none block overflow-visible"
+            aria-label="GitHub contribution graph"
+          >
+            <!-- Origin translation: 28px left for day labels, 18px top for month labels -->
+            <g transform="translate(28, 18)">
+              
+              <!-- Month Labels (Aligned 1:1 directly above each month column) -->
+              <g id="gh-month-labels">
+                {initialData.monthLabels.map((m: { col: number; label: string }) => (
+                  <text
+                    x={m.col * 13}
+                    y="-6"
+                    class="text-[10px] font-normal fill-[#656d76] dark:fill-[#7d8590]"
+                    style="font-family: inherit;"
+                  >
+                    {m.label}
+                  </text>
+                ))}
+              </g>
+
+              <!-- Day Labels (Mon, Wed, Fri aligned 1:1 with corresponding rows) -->
+              <text
+                text-anchor="start"
+                dx="-28"
+                dy="22"
+                class="text-[10px] font-normal fill-[#656d76] dark:fill-[#7d8590]"
+                style="font-family: inherit;"
+              >
+                Mon
+              </text>
+              <text
+                text-anchor="start"
+                dx="-28"
+                dy="48"
+                class="text-[10px] font-normal fill-[#656d76] dark:fill-[#7d8590]"
+                style="font-family: inherit;"
+              >
+                Wed
+              </text>
+              <text
+                text-anchor="start"
+                dx="-28"
+                dy="74"
+                class="text-[10px] font-normal fill-[#656d76] dark:fill-[#7d8590]"
+                style="font-family: inherit;"
+              >
+                Fri
+              </text>
+
+              <!-- 53 Week Columns (10px x 10px rects, 3px gap, rx=2, zero border outlines) -->
+              {initialWeeks.map((week, wIdx) => (
+                <g transform={`translate(${wIdx * 13}, 0)`}>
+                  {week.map((day, dIdx) => (
+                    <rect
+                      x="0"
+                      y={dIdx * 13}
+                      width="10"
+                      height="10"
+                      rx="2"
+                      ry="2"
+                      class="gh-cell cursor-pointer"
+                      style={`--fill-light: ${lightFills[day[1]]}; --fill-dark: ${darkFills[day[1]]};`}
+                      data-count={day[0]}
+                      data-date={day[2]}
+                      data-formatted={day[3]}
+                    />
+                  ))}
+                </g>
+              ))}
+            </g>
+          </svg>
         </div>
 
-        <!-- Heatmap Grid: Day labels + Week Columns -->
-        <div class="flex gap-[3px]">
-          <!-- Day Labels (Mon, Wed, Fri) -->
-          <div class="flex flex-col gap-[3px] text-[12px] text-[#656d76] dark:text-[#7d8590] pr-2 w-8 shrink-0 text-left select-none">
-            <span class="h-[10px]"></span>
-            <span class="h-[10px] leading-[10px]">Mon</span>
-            <span class="h-[10px]"></span>
-            <span class="h-[10px] leading-[10px]">Wed</span>
-            <span class="h-[10px]"></span>
-            <span class="h-[10px] leading-[10px]">Fri</span>
-            <span class="h-[10px]"></span>
-          </div>
+        <!-- Bottom Footer Row: Learn how we count contributions | Less ... More -->
+        <div class="mt-3 pt-2.5 border-t border-zinc-100 dark:border-[#21262d]/60 flex items-center justify-between gap-2 text-[11px] sm:text-[12px] text-[#656d76] dark:text-[#7d8590]">
+          <a
+            href="https://docs.github.com/en/get-started/exploring-projects-on-github/viewing-contributions-on-your-profile"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hover:text-[#0969da] dark:hover:text-[#4493f8] transition-colors whitespace-nowrap truncate"
+          >
+            <span class="hidden xs:inline sm:inline">Learn how we count contributions</span>
+            <span class="xs:hidden sm:hidden">Contribution guide</span>
+          </a>
 
-          <!-- 53 Week Columns -->
-          {weeks.map((week) => (
-            <div class="flex flex-col gap-[3px] shrink-0">
-              {week.map((day) => {
-                // Exact GitHub Dark & Light level color mapping
-                const colorClasses = [
-                  // Level 0
-                  "bg-[#ebedf0] dark:bg-[#161b22] outline outline-1 outline-[#1b1f2426] dark:outline-[#ffffff0d] -outline-offset-1",
-                  // Level 1
-                  "bg-[#9be9a8] dark:bg-[#0e4429]",
-                  // Level 2
-                  "bg-[#40c463] dark:bg-[#006d32]",
-                  // Level 3
-                  "bg-[#30a14e] dark:bg-[#26a641]",
-                  // Level 4
-                  "bg-[#216e39] dark:bg-[#39d353]"
-                ];
-
-                return (
-                  <div
-                    class={`gh-cell w-[10px] h-[10px] rounded-[2px] cursor-pointer transition-transform hover:scale-125 hover:z-10 ${colorClasses[day.level]}`}
-                    data-date={day.date}
-                    data-count={day.count}
-                    data-formatted={day.formatted}
-                  />
-                );
-              })}
+          <!-- Legend (Exact GitHub shades, zero border outlines) -->
+          <div class="flex items-center gap-1.5 select-none shrink-0 text-[10px] sm:text-[11px]">
+            <span>Less</span>
+            <div class="flex items-center gap-[3px]">
+              <span class="w-[10px] h-[10px] rounded-[2px] bg-[#ebedf0] dark:bg-[#161b22]"></span>
+              <span class="w-[10px] h-[10px] rounded-[2px] bg-[#9be9a8] dark:bg-[#0e4429]"></span>
+              <span class="w-[10px] h-[10px] rounded-[2px] bg-[#40c463] dark:bg-[#006d32]"></span>
+              <span class="w-[10px] h-[10px] rounded-[2px] bg-[#30a14e] dark:bg-[#26a641]"></span>
+              <span class="w-[10px] h-[10px] rounded-[2px] bg-[#216e39] dark:bg-[#39d353]"></span>
             </div>
-          ))}
+            <span>More</span>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- Bottom Footer Row: Learn how we count contributions | Less ... More -->
-    <div class="mt-4 pt-3 flex items-center justify-between text-[12px] text-[#656d76] dark:text-[#7d8590]">
-      <a
-        href="https://docs.github.com/en/get-started/exploring-projects-on-github/viewing-contributions-on-your-profile"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="hover:text-[#0969da] dark:hover:text-[#4493f8] transition-colors"
-      >
-        Learn how we count contributions
-      </a>
-
-      <!-- Legend (Exact GitHub shades) -->
-      <div class="flex items-center gap-1.5 select-none">
-        <span>Less</span>
-        <div class="flex items-center gap-[3px]">
-          <span class="w-[10px] h-[10px] rounded-[2px] bg-[#ebedf0] dark:bg-[#161b22] outline outline-1 outline-[#1b1f2426] dark:outline-[#ffffff0d] -outline-offset-1"></span>
-          <span class="w-[10px] h-[10px] rounded-[2px] bg-[#9be9a8] dark:bg-[#0e4429]"></span>
-          <span class="w-[10px] h-[10px] rounded-[2px] bg-[#40c463] dark:bg-[#006d32]"></span>
-          <span class="w-[10px] h-[10px] rounded-[2px] bg-[#30a14e] dark:bg-[#26a641]"></span>
-          <span class="w-[10px] h-[10px] rounded-[2px] bg-[#216e39] dark:bg-[#39d353]"></span>
-        </div>
-        <span>More</span>
-      </div>
+    <!-- Right: Authentic GitHub Year Navigation Buttons (1:1 with official GitHub Image 2) -->
+    <div class="hidden lg:flex flex-col gap-1 w-[72px] shrink-0 pt-7 text-xs font-medium select-none">
+      {years.map((y) => (
+        <button
+          type="button"
+          data-year={y}
+          class={`gh-year-btn-desktop px-3 py-1.5 rounded-md text-left transition-colors cursor-pointer ${
+            y === activeYear
+              ? 'bg-[#0969da] text-white font-semibold cursor-default'
+              : 'text-[#656d76] dark:text-[#7d8590] hover:bg-zinc-100 dark:hover:bg-[#21262d]'
+          }`}
+        >
+          {y}
+        </button>
+      ))}
     </div>
   </div>
 
@@ -186,40 +238,125 @@ for (let i = 0; i < rawContributions.length; i += 7) {
   </div>
 </section>
 
+<!-- Compact Multi-Year Data Embedded Safely for Fast Client Switching -->
+<script id="gh-multi-year-payload" type="application/json" set:html={JSON.stringify(multiYearData)} />
+
+<style>
+  .gh-cell {
+    fill: var(--fill-light);
+    transition: outline 0.1s ease;
+  }
+  :global(.dark) .gh-cell {
+    fill: var(--fill-dark);
+  }
+  .gh-cell:hover {
+    outline: 1px solid rgba(255, 255, 255, 0.6);
+    outline-offset: -1px;
+  }
+</style>
+
 <script is:inline>
   (function initGitHubContributions() {
+    const darkFills = ["#161b22", "#0e4429", "#006d32", "#26a641", "#39d353"];
+    const lightFills = ["#ebedf0", "#9be9a8", "#40c463", "#30a14e", "#216e39"];
+
     const tooltip = document.getElementById('gh-tooltip');
     const tooltipText = document.getElementById('gh-tooltip-text');
     const cells = document.querySelectorAll('.gh-cell');
+    const scrollContainer = document.getElementById('gh-scroll-container');
     const settingsBtn = document.getElementById('contrib-settings-btn');
     const settingsMenu = document.getElementById('contrib-settings-menu');
+    const totalCountEl = document.getElementById('github-total-count');
+    const yearSuffixEl = document.getElementById('github-year-suffix');
+    const monthLabelsGroup = document.getElementById('gh-month-labels');
 
-    // Tooltip handling
-    cells.forEach((cell) => {
-      cell.addEventListener('mouseenter', () => {
-        const count = cell.getAttribute('data-count') || '0';
-        const formatted = cell.getAttribute('data-formatted') || '';
-        
-        if (tooltip && tooltipText) {
-          if (count === '0') {
-            tooltipText.textContent = `No contributions on ${formatted}.`;
-          } else if (count === '1') {
-            tooltipText.textContent = `1 contribution on ${formatted}.`;
-          } else {
-            tooltipText.textContent = `${count} contributions on ${formatted}.`;
-          }
+    const mobileButtons = document.querySelectorAll('.gh-year-btn-mobile');
+    const desktopButtons = document.querySelectorAll('.gh-year-btn-desktop');
 
-          tooltip.classList.remove('hidden');
-          const rect = cell.getBoundingClientRect();
-          tooltip.style.left = `${rect.left + rect.width / 2}px`;
-          tooltip.style.top = `${rect.top - 6}px`;
+    // Parse multi-year dataset
+    let multiYear = null;
+    try {
+      const payloadEl = document.getElementById('gh-multi-year-payload');
+      if (payloadEl && payloadEl.textContent) {
+        multiYear = JSON.parse(payloadEl.textContent);
+      }
+    } catch (err) {
+      console.warn('Could not parse GitHub multi-year dataset', err);
+    }
+
+    // Auto-scroll to latest contributions on mobile on load
+    function scrollToLatest(smooth = false) {
+      if (!scrollContainer) return;
+      const maxScroll = scrollContainer.scrollWidth - scrollContainer.clientWidth;
+      if (maxScroll > 0) {
+        if (smooth) {
+          scrollContainer.scrollTo({ left: maxScroll, behavior: 'smooth' });
+        } else {
+          scrollContainer.scrollLeft = maxScroll;
         }
-      });
+      }
+    }
 
-      cell.addEventListener('mouseleave', () => {
-        if (tooltip) tooltip.classList.add('hidden');
+    if (window.innerWidth < 1024) {
+      // Delay slightly for initial layout paint
+      setTimeout(() => scrollToLatest(false), 50);
+    }
+
+    // Tooltip position and content handler
+    function showTooltip(cell) {
+      if (!tooltip || !tooltipText) return;
+
+      const count = cell.getAttribute('data-count') || '0';
+      const formatted = cell.getAttribute('data-formatted') || '';
+
+      if (count === '0') {
+        tooltipText.textContent = `No contributions on ${formatted}.`;
+      } else if (count === '1') {
+        tooltipText.textContent = `1 contribution on ${formatted}.`;
+      } else {
+        tooltipText.textContent = `${Number(count).toLocaleString()} contributions on ${formatted}.`;
+      }
+
+      tooltip.classList.remove('hidden');
+      const rect = cell.getBoundingClientRect();
+      const tooltipWidth = tooltip.offsetWidth || 150;
+
+      // Center horizontally on cell, with screen bound clamping
+      let left = rect.left + rect.width / 2;
+      const minLeft = tooltipWidth / 2 + 10;
+      const maxLeft = window.innerWidth - tooltipWidth / 2 - 10;
+      left = Math.max(minLeft, Math.min(left, maxLeft));
+
+      tooltip.style.left = `${left}px`;
+      tooltip.style.top = `${rect.top - 6}px`;
+    }
+
+    function hideTooltip() {
+      if (tooltip) tooltip.classList.add('hidden');
+    }
+
+    // Cell mouse and touch listeners
+    cells.forEach((cell) => {
+      cell.addEventListener('mouseenter', () => showTooltip(cell));
+      cell.addEventListener('mouseleave', hideTooltip);
+
+      // Mobile touch support
+      cell.addEventListener('click', (e) => {
+        e.stopPropagation();
+        showTooltip(cell);
       });
     });
+
+    // Dismiss tooltip on outside click or scroll
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.gh-cell')) {
+        hideTooltip();
+      }
+    });
+
+    if (scrollContainer) {
+      scrollContainer.addEventListener('scroll', hideTooltip, { passive: true });
+    }
 
     // Dropdown toggle
     if (settingsBtn && settingsMenu) {
@@ -235,15 +372,89 @@ for (let i = 0; i < rawContributions.length; i += 7) {
       });
     }
 
-    // Client-side refresh if live API updates
-    fetch('https://github-contributions-api.jogruber.de/v4/zihaduzzamaan?y=last')
-      .then((res) => (res.ok ? res.json() : null))
-      .then((data) => {
-        if (data && data.total && typeof data.total.lastYear === 'number') {
-          const totalEl = document.getElementById('github-total-count');
-          if (totalEl) totalEl.textContent = data.total.lastYear;
+    // Year Switcher Logic
+    function switchYear(selectedYear) {
+      if (!multiYear || !multiYear[selectedYear]) return;
+      const yearData = multiYear[selectedYear];
+
+      // 1. Update active styling on desktop buttons
+      desktopButtons.forEach((btn) => {
+        const y = btn.getAttribute('data-year');
+        if (y === selectedYear) {
+          btn.className = 'gh-year-btn-desktop px-3 py-1.5 rounded-md text-left bg-[#0969da] text-white font-semibold cursor-default transition-colors';
+        } else {
+          btn.className = 'gh-year-btn-desktop px-3 py-1.5 rounded-md text-left text-[#656d76] dark:text-[#7d8590] hover:bg-zinc-100 dark:hover:bg-[#21262d] transition-colors cursor-pointer';
         }
-      })
-      .catch(() => {});
+      });
+
+      // 2. Update active styling on mobile buttons
+      mobileButtons.forEach((btn) => {
+        const y = btn.getAttribute('data-year');
+        if (y === selectedYear) {
+          btn.className = 'gh-year-btn-mobile px-2.5 py-1 rounded-md text-[11.5px] font-semibold whitespace-nowrap bg-[#0969da] text-white shadow-xs border border-[#0969da] transition-all cursor-pointer';
+          if (typeof btn.scrollIntoView === 'function') {
+            btn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+          }
+        } else {
+          btn.className = 'gh-year-btn-mobile px-2.5 py-1 rounded-md text-[11.5px] font-medium whitespace-nowrap bg-zinc-100 dark:bg-[#161b22] text-[#656d76] dark:text-[#7d8590] border border-transparent dark:border-[#30363d]/50 hover:bg-zinc-200 dark:hover:bg-[#21262d] transition-all cursor-pointer';
+        }
+      });
+
+      // 3. Update header count and suffix
+      if (totalCountEl) {
+        totalCountEl.textContent = yearData.total.toLocaleString();
+      }
+      if (yearSuffixEl) {
+        yearSuffixEl.textContent = selectedYear === '2026' ? 'contributions in the last year' : `contributions in ${selectedYear}`;
+      }
+
+      // 4. Update SVG month labels
+      if (monthLabelsGroup && Array.isArray(yearData.monthLabels)) {
+        monthLabelsGroup.innerHTML = '';
+        yearData.monthLabels.forEach((m) => {
+          const textEl = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+          textEl.setAttribute('x', String(m.col * 13));
+          textEl.setAttribute('y', '-6');
+          textEl.setAttribute('class', 'text-[10px] font-normal fill-[#656d76] dark:fill-[#7d8590]');
+          textEl.setAttribute('style', 'font-family: inherit;');
+          textEl.textContent = m.label;
+          monthLabelsGroup.appendChild(textEl);
+        });
+      }
+
+      // 5. Update SVG rect cells
+      if (Array.isArray(yearData.days)) {
+        yearData.days.forEach((day, idx) => {
+          const cell = cells[idx];
+          if (!cell) return;
+          const count = day[0];
+          const level = day[1];
+          const date = day[2];
+          const formatted = day[3];
+
+          cell.setAttribute('data-count', String(count));
+          cell.setAttribute('data-date', date);
+          cell.setAttribute('data-formatted', formatted);
+          cell.style.setProperty('--fill-light', lightFills[level]);
+          cell.style.setProperty('--fill-dark', darkFills[level]);
+        });
+      }
+
+      // 6. Dismiss any active tooltip
+      hideTooltip();
+
+      // 7. On mobile, scroll to the end so recent activity is visible
+      if (window.innerWidth < 1024) {
+        scrollToLatest(true);
+      }
+    }
+
+    // Attach click handlers to all buttons
+    [...mobileButtons, ...desktopButtons].forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const year = btn.getAttribute('data-year');
+        if (year) switchYear(year);
+      });
+    });
   })();
 </script>

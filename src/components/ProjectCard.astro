@@ -16,41 +16,41 @@ const { project } = Astro.props;
       alt={project.title}
       loading="lazy"
       decoding="async"
-      class="h-full w-full object-contain sm:object-cover object-center transition-transform duration-300 group-hover/item:scale-[1.02]"
+      class="h-full w-full object-cover object-center transition-transform duration-300 group-hover/item:scale-[1.02]"
     />
 
-    <!-- Floating Badge on Thumbnail -->
-    {project.badgeTitle && (
-      <span class="absolute right-2.5 top-2.5 z-10 rounded-md border border-[var(--border)] bg-[var(--background)]/90 backdrop-blur-xs px-2 py-0.5 font-mono text-[10px] font-semibold text-[var(--foreground)] shadow-xs">
-        {project.badgeTitle}
-      </span>
-    )}
-
     <!-- Hover Overlay Gradient -->
-    <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover/item:opacity-100 pointer-events-none"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover/item:opacity-100 pointer-events-none"></div>
   </div>
 
   <!-- Content -->
   <div class="flex flex-1 flex-col justify-between p-2 pt-3">
     <div>
-      <div class="flex items-start justify-between gap-2">
-        <h3 class="text-sm font-semibold tracking-tight text-[var(--foreground)] group-hover/item:text-emerald-500 dark:group-hover/item:text-emerald-400 transition-colors">
-          <a
-            href={project.demoUrl || project.githubUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="hover:underline"
-          >
-            {project.title}
-          </a>
-        </h3>
+      <!-- Top Row: Category/Status Badge & External Link -->
+      <div class="mb-2 flex items-center justify-between gap-2">
+        {project.badgeTitle ? (
+          <span class={`inline-flex items-center gap-1.5 rounded-full px-2 py-0.5 font-mono text-[10px] font-medium ${
+            project.badgeTitle.toLowerCase().includes('live')
+              ? 'border border-emerald-500/25 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400'
+              : 'border border-[var(--border)] bg-[var(--badge-bg)] text-[var(--foreground)]'
+          }`}>
+            <span class={`h-1.5 w-1.5 rounded-full ${
+              project.badgeTitle.toLowerCase().includes('live')
+                ? 'bg-emerald-500 animate-pulse'
+                : 'bg-emerald-500 dark:bg-emerald-400'
+            }`}></span>
+            {project.badgeTitle}
+          </span>
+        ) : (
+          <div></div>
+        )}
 
         <!-- External Link Icon -->
         <a
           href={project.demoUrl || project.githubUrl}
           target="_blank"
           rel="noopener noreferrer"
-          class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--badge-bg)] text-[var(--muted-foreground)] transition-colors duration-150 group-hover/item:border-zinc-400/60 group-hover/item:text-[var(--foreground)] hover:bg-[var(--accent)]"
+          class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--badge-bg)] text-[var(--muted-foreground)] transition-all duration-150 group-hover/item:border-zinc-400/60 group-hover/item:text-[var(--foreground)] hover:bg-[var(--accent)] hover:scale-105"
           aria-label={`Open ${project.title}`}
         >
           <svg class="h-3 w-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -59,6 +59,17 @@ const { project } = Astro.props;
           </svg>
         </a>
       </div>
+
+      <h3 class="text-sm font-semibold tracking-tight text-[var(--foreground)] group-hover/item:text-emerald-500 dark:group-hover/item:text-emerald-400 transition-colors">
+        <a
+          href={project.demoUrl || project.githubUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="hover:underline"
+        >
+          {project.title}
+        </a>
+      </h3>
 
       <p class="mt-1.5 line-clamp-2 text-xs leading-relaxed text-[var(--muted-foreground)]">
         {project.description}

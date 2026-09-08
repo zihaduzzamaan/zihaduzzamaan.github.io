@@ -2,62 +2,189 @@
 import { portfolioData } from '../data/portfolioData';
 
 const { experience } = portfolioData;
+
+// Industry-standard, official, highest quality brand icons from Devicon
+interface TechAsset {
+  name: string;
+  icon: string;
+  className?: string;
+  darkInvert?: boolean;
+}
+
+const TECH_ASSETS: Record<string, TechAsset> = {
+  'React': {
+    name: 'React',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg'
+  },
+  'PHP': {
+    name: 'PHP',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg'
+  },
+  'MySQL': {
+    name: 'MySQL',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg',
+    className: 'dark:brightness-140 dark:contrast-125'
+  },
+  'Tailwind CSS': {
+    name: 'Tailwind CSS',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg'
+  },
+  'REST APIs': {
+    name: 'REST APIs',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/swagger/swagger-original.svg'
+  },
+  'Kotlin': {
+    name: 'Kotlin',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg'
+  },
+  'Python': {
+    name: 'Python',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg'
+  },
+  'C++': {
+    name: 'C++',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg'
+  },
+  'SQL': {
+    name: 'SQL (PostgreSQL)',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg'
+  },
+  'InsightFace': {
+    name: 'InsightFace / Vision',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/opencv/opencv-original.svg'
+  },
+  'Win32': {
+    name: 'Win32 / Windows',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/windows8/windows8-original.svg'
+  },
+  'Windows': {
+    name: 'Windows API',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/windows8/windows8-original.svg'
+  },
+  'TypeScript': {
+    name: 'TypeScript',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg'
+  },
+  'JavaScript': {
+    name: 'JavaScript',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg'
+  },
+  'Next.js': {
+    name: 'Next.js',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg',
+    darkInvert: true
+  },
+  'Node.js': {
+    name: 'Node.js',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg'
+  }
+};
 ---
 
 <section id="experience" class="px-3.5 py-6 sm:px-6 sm:py-8">
   <!-- Section Header (Clean, Big & Bold) -->
   <div class="mb-5 sm:mb-6 flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 border-b border-[var(--edge)] pb-2.5 sm:pb-3">
-    <h2 class="text-xl sm:text-3xl font-bold tracking-tight text-[var(--foreground)]">
+    <h2 class="text-lg sm:text-2xl font-bold tracking-wide uppercase text-[var(--foreground)]">
       Professional Experience
     </h2>
     <span class="font-mono text-xs text-[var(--muted-foreground)]">Engineering Timeline & Milestones</span>
   </div>
 
-  <!-- Connected Timeline (Abdul Rehman Style) -->
-  <div class="relative space-y-4 sm:space-y-6 before:absolute before:left-3 before:top-2 before:h-[calc(100%-1rem)] before:w-px before:bg-[var(--border)]">
-    {experience.map((item) => (
-      <div class="relative pl-7 sm:pl-9">
-        <!-- Node Dot -->
-        <div class="absolute left-1.5 sm:left-1.5 top-1.5 flex h-3 sm:h-3.5 w-3 sm:w-3.5 items-center justify-center rounded-full border-2 border-[var(--background)] bg-[var(--foreground)]">
-          {item.current && (
-            <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
-          )}
-        </div>
+  <!-- Experience Cards (Impeccable Full-Width Stack) -->
+  <div class="space-y-4 sm:space-y-5">
+    {experience.map((item) => {
+      const workTypes = item.workTypes || [];
+      const stack = item.stack || [];
 
-        <!-- Experience Card -->
-        <div class="rounded-xl border border-[var(--border)] bg-[var(--card)] p-3 sm:p-4 transition-all hover:border-[var(--muted-foreground)]/40">
-          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-0.5 sm:gap-1 mb-1.5 sm:mb-2">
-            <h3 class="text-xs sm:text-sm font-semibold text-[var(--foreground)]">
+      return (
+        <article class="group relative rounded-xl border border-[var(--border)] bg-[var(--card)]/60 hover:bg-[var(--card)] p-4 sm:p-5 transition-all duration-200 hover:border-[var(--muted-foreground)]/30">
+          <!-- Header: Role Title & Period -->
+          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mb-1.5">
+            <h3 class="text-sm sm:text-base font-bold tracking-tight text-[var(--foreground)]">
               {item.role}
             </h3>
-            <span class="font-mono text-[11px] sm:text-xs text-[var(--muted-foreground)]">
-              {item.period}
-            </span>
+            <div class="inline-flex items-center gap-1.5 font-mono text-[11px] sm:text-xs text-[var(--muted-foreground)] shrink-0">
+              {item.current && (
+                <span class="relative flex h-2 w-2">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                </span>
+              )}
+              <span>{item.period}</span>
+            </div>
           </div>
 
-          <div class="flex items-center gap-2 mb-2 sm:mb-3 text-[11px] sm:text-xs font-mono text-emerald-500">
-            <span>{item.company}</span>
-            <span>•</span>
+          <!-- Company & Metadata Row -->
+          <div class="flex items-center gap-2 mb-3 text-xs font-mono">
+            <span class="text-emerald-500 dark:text-emerald-400 font-semibold">{item.company}</span>
+            <span class="text-zinc-400 dark:text-zinc-600 select-none">•</span>
             <span class="text-[var(--muted-foreground)]">{item.location}</span>
+            {item.type && (
+              <>
+                <span class="hidden sm:inline text-zinc-400 dark:text-zinc-600 select-none">•</span>
+                <span class="hidden sm:inline text-zinc-500 text-[11px]">{item.type}</span>
+              </>
+            )}
           </div>
 
-          <!-- Description Bullets -->
-          <ul class="space-y-1 sm:space-y-1.5 text-[11.5px] sm:text-xs text-[var(--muted-foreground)] leading-relaxed list-disc list-inside mb-2.5 sm:mb-3">
+          <!-- Description Bullets (Hanging Indent for High Readability) -->
+          <ul class="space-y-2 text-xs sm:text-[13px] text-zinc-600 dark:text-zinc-300 leading-relaxed mb-4">
             {item.description.map((bullet) => (
-              <li>{bullet}</li>
+              <li class="flex items-start gap-2.5">
+                <span class="h-1.5 w-1.5 rounded-full bg-emerald-500/60 mt-1.5 shrink-0"></span>
+                <span class="flex-1">{bullet}</span>
+              </li>
             ))}
           </ul>
 
-          <!-- Tech Stack Tags -->
-          <div class="flex flex-wrap gap-1">
-            {item.tags.map((tag) => (
-              <span class="rounded-md border border-[var(--border)] bg-[var(--badge-bg)] px-1.5 sm:px-2 py-0.5 font-mono text-[9.5px] sm:text-[10px] text-[var(--muted-foreground)]">
-                {tag}
+          <!-- 1. Types of Work: Semantic Pill Badges -->
+          {workTypes.length > 0 && (
+            <div class="flex flex-wrap items-center gap-1.5 mb-3.5">
+              {workTypes.map((badge) => (
+                <span class="inline-flex items-center px-2.5 py-1 rounded-md text-[10.5px] sm:text-[11px] font-mono font-medium tracking-tight bg-[var(--badge-bg)] text-[var(--foreground)] border border-[var(--border)] hover:border-emerald-500/40 transition-colors">
+                  {badge}
+                </span>
+              ))}
+            </div>
+          )}
+
+          <!-- 2. Tech Stack: Micro-Pills with Micro-Icon + Label -->
+          {stack.length > 0 && (
+            <div class="flex items-center gap-2.5 pt-3 border-t border-[var(--edge)]">
+              <span class="font-mono text-[10.5px] sm:text-[11px] uppercase tracking-wider text-[var(--muted-foreground)] font-semibold shrink-0 select-none">
+                Stack:
               </span>
-            ))}
-          </div>
-        </div>
-      </div>
-    ))}
+              <div class="flex items-center gap-1.5 sm:gap-2 flex-wrap">
+                {stack.map((techName) => {
+                  const asset = TECH_ASSETS[techName] || {
+                    name: techName,
+                    icon: `https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${techName.toLowerCase()}/${techName.toLowerCase()}-original.svg`
+                  };
+
+                  return (
+                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[11px] sm:text-[11.5px] font-mono font-medium tracking-tight bg-[var(--badge-bg)] text-[var(--foreground)] border border-[var(--border)] hover:border-[var(--muted-foreground)]/40 hover:bg-[var(--accent)] transition-all duration-150 shadow-2xs">
+                      <img
+                        src={asset.icon}
+                        alt={techName}
+                        loading="lazy"
+                        width="14"
+                        height="14"
+                        class:list={[
+                          "size-3.5 shrink-0 object-contain",
+                          asset.className,
+                          asset.darkInvert && "dark:invert"
+                        ]}
+                        onerror="this.style.display='none'"
+                      />
+                      <span>{techName}</span>
+                    </span>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+        </article>
+      );
+    })}
   </div>
 </section>

@@ -25,7 +25,7 @@ const { personal } = portfolioData;
     <div class="hero-scanline absolute inset-0 pointer-events-none"></div>
 
     <!-- Centerpiece: SVG Name Logo + "THE DEV" Glitch + Tagline -->
-    <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-4 sm:px-6 z-10 select-none">
+    <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-4 sm:px-6 z-10 select-none pb-3 sm:pb-0">
       <!-- SVG Name Logo (Proportional to container) -->
       <svg
         id="hero-logo-svg"
@@ -87,8 +87,8 @@ const { personal } = portfolioData;
     <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 sm:gap-6">
       <!-- Left: Profile Image BEFORE Name Section (Side-by-Side Flex Layout) -->
       <div class="flex items-end gap-3.5 sm:gap-5 min-w-0 flex-1">
-        <!-- Profile Image Avatar: Twice Current Size, Overlapping Upper Hero Section -->
-        <div class="relative size-32 sm:size-44 shrink-0 rounded-full border-4 sm:border-[5px] border-[var(--background)] bg-[var(--background)] shadow-2xl p-0.5 overflow-hidden z-20 transition-transform duration-200 hover:scale-105 group -mt-16 sm:-mt-22 md:-mt-24">
+        <!-- Profile Image Avatar: Perfectly balanced size on Mobile, Overlapping Upper Hero Section Without Covering Banner Text -->
+        <div class="relative size-24 sm:size-44 shrink-0 rounded-full border-4 sm:border-[5px] border-[var(--background)] bg-[var(--background)] shadow-2xl p-0.5 overflow-hidden z-20 transition-transform duration-200 hover:scale-105 group -mt-8 sm:-mt-22 md:-mt-24">
           <img
             src={personal.avatarUrl}
             alt={personal.name}

@@ -6,45 +6,51 @@ const { education } = portfolioData;
 
 <section id="education" class="px-3.5 py-6 sm:px-6 sm:py-8">
   <!-- Section Header (Clean, Big & Bold) -->
-  <div class="mb-5 sm:mb-6 flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 border-b border-[var(--edge)] pb-2.5 sm:pb-3">
-    <h2 class="text-xl sm:text-3xl font-bold tracking-tight text-[var(--foreground)]">
+  <div class="mb-5 sm:mb-6 border-b border-[var(--edge)] pb-2.5 sm:pb-3">
+    <h2 class="text-lg sm:text-2xl font-bold tracking-wide uppercase text-[var(--foreground)]">
       Education & Academic Honors
     </h2>
-    <span class="font-mono text-xs text-[var(--muted-foreground)]">Software Engineering & Golden GPA 5.00</span>
   </div>
 
-  <!-- Education Cards Grid -->
-  <div class="space-y-3 sm:space-y-4">
+  <!-- Education Cards Grid (Impeccable Polished Stack) -->
+  <div class="space-y-3.5 sm:space-y-4">
     {education.map((item) => (
-      <div class="rounded-xl border border-[var(--border)] bg-[var(--card)] p-3 sm:p-4 transition-all hover:border-[var(--muted-foreground)]/40">
-        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-0.5 sm:gap-1 mb-1.5 sm:mb-2">
-          <div class="flex items-center gap-2">
-            <h3 class="text-xs sm:text-sm font-semibold text-[var(--foreground)]">
+      <article class="group rounded-xl border border-[var(--border)] bg-[var(--card)]/60 hover:bg-[var(--card)] p-4 sm:p-5 transition-all duration-200 hover:border-[var(--muted-foreground)]/30">
+        <!-- Header: Institution, Badge & Period -->
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mb-1.5">
+          <div class="flex items-center gap-2 flex-wrap">
+            <h3 class="text-sm sm:text-base font-bold tracking-tight text-[var(--foreground)]">
               {item.institution}
             </h3>
             {item.badge && (
-              <span class="rounded-full border border-amber-500/30 bg-amber-500/10 px-2 py-0.5 font-mono text-[9.5px] sm:text-[10px] font-semibold text-amber-500">
+              <span class="rounded-full border border-amber-500/30 bg-amber-500/10 px-2 py-0.5 font-mono text-[10px] sm:text-[10.5px] font-semibold text-amber-500">
                 {item.badge}
               </span>
             )}
           </div>
-          <span class="font-mono text-[11px] sm:text-xs text-[var(--muted-foreground)]">
+          <span class="font-mono text-[11px] sm:text-xs text-[var(--muted-foreground)] shrink-0">
             {item.period}
           </span>
         </div>
 
-        <div class="flex items-center gap-1.5 sm:gap-2 mb-2 text-[11px] sm:text-xs font-mono">
-          <span class="text-[var(--foreground)] font-medium">{item.degree}</span>
-          <span class="text-[var(--muted-foreground)]">•</span>
-          <span class="text-emerald-500 font-semibold">{item.grade}</span>
-        </div>
-
-        <ul class="space-y-1 text-[11.5px] sm:text-xs text-[var(--muted-foreground)] leading-relaxed list-disc list-inside">
-          {item.highlights.map((bullet) => (
-            <li>{bullet}</li>
-          ))}
+        <!-- Highlights (Hanging Indent with Softened Key Labels for Calm Readability) -->
+        <ul class="space-y-2 text-xs sm:text-[13px] text-zinc-600 dark:text-zinc-400 leading-relaxed pt-1">
+          {item.highlights.map((bullet) => {
+            const splitIdx = bullet.indexOf(': ');
+            const label = splitIdx !== -1 ? bullet.substring(0, splitIdx + 1) : '';
+            const content = splitIdx !== -1 ? bullet.substring(splitIdx + 2) : bullet;
+            return (
+              <li class="flex items-start gap-2.5">
+                <span class="h-1.5 w-1.5 rounded-full bg-emerald-500/50 mt-1.5 shrink-0"></span>
+                <span class="flex-1">
+                  {label && <strong class="font-medium text-[var(--foreground)]/75">{label} </strong>}
+                  <span>{content}</span>
+                </span>
+              </li>
+            );
+          })}
         </ul>
-      </div>
+      </article>
     ))}
   </div>
 </section>

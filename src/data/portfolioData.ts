@@ -17,6 +17,8 @@ export interface ExperienceItem {
   location: string;
   description: string[];
   tags: string[];
+  workTypes?: string[];
+  stack?: string[];
   current?: boolean;
 }
 
@@ -220,6 +222,8 @@ export const portfolioData = {
         "Constructed the complete full-stack architecture with React for the frontend participant hub and PHP for backend storage handling.",
         "Automated end-to-end competition workflows supporting solo (1v1), double-elimination brackets, and multi-tier group stages."
       ],
+      workTypes: ["Esports Tournament Engine", "Real-Time Data Pipelines", "Match Automation", "Full-Stack Architecture"],
+      stack: ["React", "PHP", "MySQL", "Tailwind CSS", "REST APIs"],
       tags: ["React", "PHP", "MySQL", "Data Pipelines", "Tournament Engine", "REST APIs", "Automation"]
     },
     {
@@ -235,6 +239,8 @@ export const portfolioData = {
         "Designed and normalized relational database schemas in MySQL for customer orders, inventory variants, and transaction records.",
         "Delivered responsive mobile-first UI performance guaranteeing smooth shopping flows under peak visitor traffic."
       ],
+      workTypes: ["Commercial E-Commerce", "Inventory Management", "Cart & Checkout Flows", "Relational Database Schemas"],
+      stack: ["React", "PHP", "MySQL", "Tailwind CSS", "REST APIs"],
       tags: ["React", "PHP", "MySQL", "REST APIs", "E-Commerce", "Tailwind CSS", "Inventory Management"]
     },
     {
@@ -249,6 +255,8 @@ export const portfolioData = {
         "Engineered on-device edge AI computer vision pipeline (Attenvo) with InsightFace ArcFace 512D embeddings in native Kotlin and Python.",
         "Exploring low-level audio DSP manipulation with Equalizer APO and multi-monitor hardware calibration via DDC/CI & Win32 APIs."
       ],
+      workTypes: ["Edge AI Computer Vision", "Algorithmic Engineering", "Audio DSP Manipulation", "Hardware Calibration (DDC/CI)"],
+      stack: ["Kotlin", "Python", "C++", "SQL", "InsightFace", "Win32"],
       tags: ["Kotlin", "Python", "InsightFace", "Data Structures", "Algorithms", "C++", "Win32", "SQL"]
     }
   ] as ExperienceItem[],
@@ -256,35 +264,38 @@ export const portfolioData = {
   education: [
     {
       institution: "B.Sc. in Software Engineering",
-      degree: "Undergraduate Degree, 2nd Year Student",
+      degree: "Software Engineering",
       period: "2024 - Present",
-      grade: "In Progress (2nd Year)",
-      badge: "Current Study",
+      grade: "Current SGPA 3.96 / 4.00",
+      badge: "SGPA 3.96",
       highlights: [
-        "Core Coursework: Data Structures & Algorithms, Object-Oriented Software Engineering, Database Management Systems, Computer Networks.",
-        "Active member of programming clubs and engineering research groups focusing on data-intensive systems."
+        "Academic Standing: Maintained SGPA 3.96 / 4.00 across 3 completed semesters.",
+        "Academic Background: Software Engineering Major (2nd Year Undergraduate).",
+        "Specific Proficiencies: Data Structures & Algorithms, OOP, Database Systems & Computer Networks."
       ]
     },
     {
       institution: "Higher Secondary Certificate (HSC)",
-      degree: "Science Stream",
+      degree: "Science Group",
       period: "Completed",
       grade: "Golden GPA 5.00 / 5.00",
       badge: "Golden GPA 5",
       highlights: [
-        "Achieved the highest academic distinction: Golden GPA 5.00 across all science and mathematics disciplines.",
-        "Excellence in Higher Mathematics, Physics, Chemistry, and Information & Communication Technology."
+        "Academic Result: Golden GPA 5.00 / 5.00 (Board Distinction across all subjects).",
+        "Academic Background: Science Group.",
+        "Specific Proficiencies: Higher Mathematics, Physics, Chemistry & ICT."
       ]
     },
     {
       institution: "Secondary School Certificate (SSC)",
-      degree: "Science Stream",
+      degree: "Science Group",
       period: "Completed",
       grade: "Golden GPA 5.00 / 5.00",
       badge: "Golden GPA 5",
       highlights: [
-        "Secured Golden GPA 5.00 with perfect grade marks in all academic subjects.",
-        "Built early foundation in computer science and logical problem solving."
+        "Academic Result: Golden GPA 5.00 / 5.00 (Perfect grade marks in all academic subjects).",
+        "Academic Background: Science Group.",
+        "Specific Proficiencies: General Mathematics, Physical Science & Computing Fundamentals."
       ]
     }
   ] as EducationItem[],
