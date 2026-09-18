@@ -8,8 +8,44 @@ interface Props {
 const { project } = Astro.props;
 ---
 
-<article class="group/item flex flex-col rounded-xl border border-[var(--border)] bg-[var(--card)] p-2 shadow-xs transition-[border-color,box-shadow] duration-200 hover:border-zinc-400/60 dark:hover:border-zinc-500/60 hover:shadow-md">
-  <!-- 16:9 Aspect Preview Thumbnail -->
+<article class="group/item flex flex-col rounded-xl border border-[var(--border)] bg-[var(--card)] p-2.5 sm:p-3 shadow-xs transition-[border-color,box-shadow] duration-200 hover:border-zinc-400/60 dark:hover:border-zinc-500/60 hover:shadow-md">
+  <!-- Top Bar: Clean Badge without Pill Container & External Link -->
+  <div class="mb-2 flex items-center justify-between px-0.5">
+    {project.badgeTitle ? (
+      <div class="flex items-center gap-1.5 font-mono text-[11px] font-medium tracking-wide">
+        <span class={`size-1.5 rounded-full shrink-0 ${
+          project.badgeTitle.toLowerCase().includes('live')
+            ? 'bg-emerald-500 animate-pulse'
+            : 'bg-emerald-500/70 dark:bg-emerald-400/70'
+        }`}></span>
+        <span class={
+          project.badgeTitle.toLowerCase().includes('live')
+            ? 'text-emerald-600 dark:text-emerald-400'
+            : 'text-zinc-600 dark:text-zinc-400'
+        }>
+          {project.badgeTitle}
+        </span>
+      </div>
+    ) : (
+      <div></div>
+    )}
+
+    <!-- External Link Icon -->
+    <a
+      href={project.demoUrl || project.githubUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="flex size-6 shrink-0 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--badge-bg)] text-[var(--muted-foreground)] transition-all duration-150 group-hover/item:border-zinc-400/60 group-hover/item:text-[var(--foreground)] hover:bg-[var(--accent)] hover:scale-105"
+      aria-label={`Open ${project.title}`}
+    >
+      <svg class="size-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M7 7h10v10"></path>
+        <path d="M7 17 17 7"></path>
+      </svg>
+    </a>
+  </div>
+
+  <!-- 16:9 Aspect Preview Thumbnail (Unobstructed & Clean) -->
   <div class="relative aspect-video w-full overflow-hidden rounded-lg border border-[var(--border)] bg-zinc-950 flex items-center justify-center">
     <img
       src={project.image}
@@ -20,47 +56,13 @@ const { project } = Astro.props;
     />
 
     <!-- Hover Overlay Gradient -->
-    <div class="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover/item:opacity-100 pointer-events-none"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover/item:opacity-100 pointer-events-none"></div>
   </div>
 
-  <!-- Content -->
-  <div class="flex flex-1 flex-col justify-between p-2 pt-3">
+  <!-- Content Below Photo -->
+  <div class="flex flex-1 flex-col justify-between pt-2.5 px-0.5">
     <div>
-      <!-- Top Row: Category/Status Badge & External Link -->
-      <div class="mb-2 flex items-center justify-between gap-2">
-        {project.badgeTitle ? (
-          <span class={`inline-flex items-center gap-1.5 rounded-full px-2 py-0.5 font-mono text-[10px] font-medium ${
-            project.badgeTitle.toLowerCase().includes('live')
-              ? 'border border-emerald-500/25 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400'
-              : 'border border-[var(--border)] bg-[var(--badge-bg)] text-[var(--foreground)]'
-          }`}>
-            <span class={`h-1.5 w-1.5 rounded-full ${
-              project.badgeTitle.toLowerCase().includes('live')
-                ? 'bg-emerald-500 animate-pulse'
-                : 'bg-emerald-500 dark:bg-emerald-400'
-            }`}></span>
-            {project.badgeTitle}
-          </span>
-        ) : (
-          <div></div>
-        )}
-
-        <!-- External Link Icon -->
-        <a
-          href={project.demoUrl || project.githubUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--badge-bg)] text-[var(--muted-foreground)] transition-all duration-150 group-hover/item:border-zinc-400/60 group-hover/item:text-[var(--foreground)] hover:bg-[var(--accent)] hover:scale-105"
-          aria-label={`Open ${project.title}`}
-        >
-          <svg class="h-3 w-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M7 7h10v10"></path>
-            <path d="M7 17 17 7"></path>
-          </svg>
-        </a>
-      </div>
-
-      <h3 class="text-sm font-semibold tracking-tight text-[var(--foreground)] group-hover/item:text-emerald-500 dark:group-hover/item:text-emerald-400 transition-colors">
+      <h3 class="text-sm font-semibold tracking-tight text-[var(--foreground)] group-hover/item:text-emerald-500 dark:group-hover/item:text-emerald-400 transition-colors leading-snug">
         <a
           href={project.demoUrl || project.githubUrl}
           target="_blank"

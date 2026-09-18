@@ -87,8 +87,15 @@ const { personal } = portfolioData;
     <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 sm:gap-6">
       <!-- Left: Profile Image BEFORE Name Section (Side-by-Side Flex Layout) -->
       <div class="flex items-end gap-3.5 sm:gap-5 min-w-0 flex-1">
-        <!-- Profile Image Avatar: Perfectly balanced size on Mobile, Overlapping Upper Hero Section Without Covering Banner Text -->
-        <div class="relative size-24 sm:size-44 shrink-0 rounded-full border-4 sm:border-[5px] border-[var(--background)] bg-[var(--background)] shadow-2xl p-0.5 overflow-hidden z-20 transition-transform duration-200 hover:scale-105 group -mt-8 sm:-mt-22 md:-mt-24">
+        <!-- Profile Image Avatar: Clickable to preview in modal -->
+        <button
+          type="button"
+          id="avatar-preview-trigger"
+          aria-haspopup="dialog"
+          aria-expanded="false"
+          aria-label="Preview profile photo"
+          class="relative size-24 sm:size-44 shrink-0 rounded-full border-4 sm:border-[5px] border-[var(--background)] bg-[var(--background)] shadow-2xl p-0.5 overflow-hidden z-20 transition-all duration-200 hover:scale-105 active:scale-95 group -mt-8 sm:-mt-22 md:-mt-24 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 text-left block"
+        >
           <img
             src={personal.avatarUrl}
             alt={personal.name}
@@ -98,7 +105,15 @@ const { personal } = portfolioData;
             loading="eager"
             decoding="async"
           />
-        </div>
+          <!-- Subtle preview hint on hover -->
+          <div class="absolute inset-0 rounded-full bg-black/25 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center pointer-events-none">
+            <span class="rounded-full bg-black/60 backdrop-blur-xs p-1.5 text-white/95 shadow-sm border border-white/20">
+              <svg class="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7" />
+              </svg>
+            </span>
+          </div>
+        </button>
 
         <!-- Name & Dynamic Roles Section -->
         <div class="space-y-1 min-w-0 flex-1 pb-1 sm:pb-2">
@@ -140,6 +155,81 @@ const { personal } = portfolioData;
   <!-- Quick Info Metadata Grid (1:1 with Abdul Rehman's Bio Data) -->
   <QuickInfo />
 </section>
+
+<!-- Minimalist Profile Preview Modal -->
+<div
+  id="avatar-modal"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="avatar-modal-title"
+  class="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none opacity-0 transition-opacity duration-100 ease-out"
+>
+  <!-- Dark Glass Backdrop (Ultra-Fast 0ms Composite Paint) -->
+  <div id="avatar-modal-backdrop" class="absolute inset-0 bg-black/85 cursor-pointer"></div>
+
+  <!-- Modal Dialog Card (Snappy 90fps scale animation) -->
+  <div
+    id="avatar-modal-card"
+    class="relative z-10 w-full max-w-sm max-h-[90vh] flex flex-col rounded-2xl border border-white/15 dark:border-white/10 bg-zinc-900/98 dark:bg-zinc-950/98 p-3.5 sm:p-4 shadow-2xl transition-all duration-100 ease-out scale-[0.98] translate-y-0.5 [will-change:transform,opacity]"
+  >
+    <!-- Modal Top Bar -->
+    <div class="flex items-center justify-between pb-3">
+      <div class="flex items-center gap-2">
+        <span class="size-2 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span class="font-mono text-xs text-zinc-300 font-medium tracking-wide">Profile Preview</span>
+      </div>
+      <button
+        type="button"
+        id="avatar-modal-close"
+        aria-label="Close preview"
+        class="flex size-7 items-center justify-center rounded-full bg-zinc-800/80 hover:bg-zinc-700 text-zinc-300 hover:text-white transition-colors cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-emerald-500"
+      >
+        <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Image Display Frame -->
+    <div class="relative aspect-square w-full overflow-hidden rounded-xl border border-white/10 bg-zinc-950 shadow-inner">
+      <img
+        src={personal.avatarUrl}
+        alt={personal.name}
+        class="size-full object-cover select-none"
+        width="720"
+        height="720"
+        loading="eager"
+        decoding="sync"
+        fetchpriority="high"
+      />
+    </div>
+
+    <!-- Modal Footer -->
+    <div class="pt-3 flex items-center justify-between gap-2">
+      <div class="min-w-0 flex-1">
+        <h4 id="avatar-modal-title" class="text-sm font-bold tracking-tight text-white truncate">
+          {personal.name}
+        </h4>
+        <p class="text-xs text-zinc-400 font-medium truncate">
+          Full-Stack Developer & Software Engineer
+        </p>
+      </div>
+      <a
+        href="/avatars/raw_profile.jpeg"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-1 rounded-md border border-white/10 bg-white/5 hover:bg-white/10 px-2 py-1 font-mono text-[10px] text-zinc-300 transition-colors shrink-0"
+        title="View raw photograph"
+      >
+        <span>Original</span>
+        <svg class="size-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M7 17L17 7M17 7H7M17 7V17" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </a>
+    </div>
+  </div>
+</div>
 
 <style>
   /* ── High-Intensity Intermittent Glitch Burst on "THE DEV" ── */
@@ -370,5 +460,49 @@ const { personal } = portfolioData;
     }
 
     setTimeout(tick, 1500);
+  })();
+
+  (function initAvatarModal() {
+    const trigger = document.getElementById('avatar-preview-trigger');
+    const modal = document.getElementById('avatar-modal');
+    const backdrop = document.getElementById('avatar-modal-backdrop');
+    const card = document.getElementById('avatar-modal-card');
+    const closeBtn = document.getElementById('avatar-modal-close');
+    if (!trigger || !modal || !card) return;
+
+    function openModal() {
+      modal.classList.remove('pointer-events-none', 'opacity-0');
+      modal.classList.add('opacity-100');
+      card.classList.remove('scale-[0.98]', 'translate-y-0.5');
+      card.classList.add('scale-100', 'translate-y-0');
+      trigger.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+      closeBtn?.focus({ preventScroll: true });
+    }
+
+    function closeModal() {
+      modal.classList.add('opacity-0', 'pointer-events-none');
+      modal.classList.remove('opacity-100');
+      card.classList.add('scale-[0.98]', 'translate-y-0.5');
+      card.classList.remove('scale-100', 'translate-y-0');
+      trigger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+      trigger.focus({ preventScroll: true });
+    }
+
+    trigger.addEventListener('click', openModal);
+    closeBtn?.addEventListener('click', closeModal);
+    backdrop?.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+      if (e.target && !card.contains(e.target)) {
+        closeModal();
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !modal.classList.contains('pointer-events-none')) {
+        closeModal();
+      }
+    });
   })();
 </script>
